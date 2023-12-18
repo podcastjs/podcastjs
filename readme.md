@@ -1,99 +1,78 @@
 # Podcastjs
 
 <p float="left">
-  <img src="./coverage/branches.svg">
-  <img src="./coverage/functions.svg">
-  <img src="./coverage/lines.svg">
-  <img src="./coverage/statements.svg">
+  <img src="./.coverage/branches.svg">
+  <img src="./.coverage/functions.svg">
+  <img src="./.coverage/lines.svg">
+  <img src="./.coverage/statements.svg">
 </p>
 
-A simple static sitre generatorfor podcasters. Made with love
-
-<!-- 
 <p align="center">
-  <img src="./.assets/logo.png" width=200 ></img>
+  <img src="./theme/favicon.png" width=150>  
 </p>
 
+A simple static site generator for podcasters. Made with love
 
-
-A little and friendly buddy to help you in your devops automations.
-
-## requirements
+## Requirements
 
 - Nodejs
-  - For windows users https://nodejs.org/en/download
-  - For linux users I don't need to explain it
+- Markdown files
+- Mp3 or wav public urls
 
-- pm2
+## How it works
 
-```
-npm install -g pm2
-```
-
-- miniops tool
+Only add any markdown file inside the posts folder with a content like this:
 
 ```
-git clone https://github.com/usil/miniops.git -b 1.0.0-snapshot
-```
+<!-- 
 
-## Run - Windows
-
-```
-set cron_expression=*/15 * * * * *
-set git_url=http://192.168.0.66:6000/asp-xit.git
-set git_branch=develop
-set yaml_location=C:\foo\bar\acme.yaml
-
-npm run pm2:polling
-```
-
-## Run - Linux
-
-```
-export cron_expression="*/15 * * * * *"
-export git_url=http://192.168.0.66:6000/acme.git
-export git_branch=develop
-export yaml_location=/foo/bar/acme.yaml
-
-npm run pm2:polling
-```
-
-## Logs
-
-```
-pm2 flush miniops
-pm2 logs miniops
-```
-
-## Delete
-
-```
-pm2 delete miniops
-```
-
-## Update
-
-To try another version:
-
-- delete it
-
-```
-pm2 delete miniops
-```
-
-- clone or pull
-- start again
-
-## References
-
-https://betterstack.com/community/guides/scaling-nodejs/pm2-guide/
+layout : post
+title : ¿Cómo crear un programa que aprenda por si solo?
+description : Un programa que aprenda de forma autónoma, es algo muy complejo.
+category : ai
+tags : series, fiction
+comments : true 
+author : Rich Dotcom
+thumbnail_image_url: images/img_3.jpg
+datetime_str: 20 September 2017
+datetime : 2017-08-20
+duration: 0:30:20
+sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
 -->
 
 
+Want to report a bug, request a feature, contribute or translate docs4all-ligth? At the moment most things can be
+contributed via the main [docs4all-ligth GitHub repository](https://github.com/docs4all/docs4all-ligth).
+
+* [Submit a bug report](https://github.com/docs4all/docs4all-ligth/issues?labels=bug)
+* [Submit a feature request](https://github.com/docs4all/docs4all-ligth/issues?labels=enhancement)
+* [Submit a pull request](https://github.com/docs4all/docs4all-ligth/pulls)
+```
+
+Then run with:
+
+
+```js
+npm run dev
+```
+
+Podcastjs will give a landing page with the recent entries
+
+
+## Current status
+
+![image](https://github.com/podcastjs/podcastjs/assets/3322836/7b9f6d81-df7c-46c1-8442-e5b5ee895740)
+
 ## Acknowledgments
 
 - https://themewagon.com/themes/free-bootstrap-4-html5-responsive-musical-website-template-podcast/
+- https://www.flaticon.com/free-icon/voice_3178286
+- <a href="https://www.flaticon.com/free-icons/voice-chat" title="voice chat icons">Voice chat icons created by Uniconlabs - Flaticon</a>
+
+## Roadmap
+
+check the issues page
 
 ## Contributors
 

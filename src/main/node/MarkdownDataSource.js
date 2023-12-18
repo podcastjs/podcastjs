@@ -6,38 +6,14 @@ function MarkdownDataSource() {
 
   this.documentsBaseDir;
   this.databaseLocation;
+  this.shouldExcludeFolders = false;
+  this.excludeFoldersList = [];
   var excludeRootDirInPath = true;
   var sequence = 0;
-  var shouldExcludeFolders = false;
+  
 
   this.init = async () => {
-    var existDatabase = false;
-    try {
-      await fs.promises.access(this.databaseLocation, fs.constants.F_OK)
-      existDatabase = true;
-    } catch (e) {
-      if(!e.code ==="ENOENT"){
-        console.log("database.json cannot be accesed");
-        return;
-      }
-      existDatabase = false;
-    }
-    if(existDatabase===true){
-      try {
-        await fs.promises.truncate(this.databaseLocation, 0)
-      } catch (e) {
-        console.log("failed while database.json was being deleting");
-        console.log(e);
-      }
-    }else{
-      try {
-        await fs.promises.writeFile(this.databaseLocation, "{}");
-      } catch (e) {
-        console.log("failed while database.json was being initializing");
-        console.log(e);
-      }
-    }
-    this.database = new loki(this.databaseLocation, { autoload: true });
+    this.database = new loki(this.databaseLocation);
     this.documents = this.database.addCollection('documents');
   };
 
@@ -45,8 +21,12 @@ function MarkdownDataSource() {
     return this.database.getCollection('documents');
   };
 
-  this.save = () => {
-    this.database.saveDatabase();
+  this.save = async () => {
+    this.database.saveDatabase(this.databaseLocation);
+  };
+
+  this.delete = async () => {
+    this.database.deleteDatabase(this.databaseLocation);
   };
 
   this.setDocumentsBaseDir = (documentsBaseDir) => {
@@ -61,10 +41,15 @@ function MarkdownDataSource() {
     return this.shouldExcludeFolders = excludeFoldersValue;
   };
 
+  this.excludedList = (excludeFoldersList) => {
+    return this.excludeFoldersList = excludeFoldersList;
+  };  
+
   this.getDocumentsBaseDir = () => {
     return this.documentsBaseDir;
   };
 
+  //@todo: should fail on mandatory fields like datetime
   this.loadDocuments = (dir, parent) => {
     if(typeof dir === 'undefined') dir = this.getDocumentsBaseDir();
     if (dir[dir.length - 1] != '/') dir = dir.concat('/')
@@ -73,6 +58,7 @@ function MarkdownDataSource() {
       files = fs.readdirSync(dir);
     files.forEach((file) => {
       if (fs.statSync(dir + file).isDirectory()) {
+        //@todo : bla ck list folders
         let id = this.next();
         if(this.shouldExcludeFolders === false){
           let meta = this.getMetaForDirectoryIfExist(dir + file);

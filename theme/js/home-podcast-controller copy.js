@@ -8,11 +8,18 @@ function HomePodcastController(){
         this.loadPoscastEntries();
     }
   
-    this.loadPoscastEntries = async() => {
-
-        var data = await this.apiClient.findAllPaginated(defaultPageSize, 1);
-        renderPosts(data.content);
-        renderPagination(data.pagination);
+    this.loadPoscastEntries = () => {
+        //load posts_entries
+        fetch("./database.json")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(jsonResponse) {
+            console.log(jsonResponse);
+            console.log(jsonResponse.length);
+            renderPosts(jsonResponse);
+            renderPagination(jsonResponse);
+        });
         
         //instantiate mp3 player
         var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
@@ -47,14 +54,17 @@ function HomePodcastController(){
         document.getElementById('podcasts_container').innerHTML = html;
     }   
     
-    function renderPagination(paginationInfo){
-        console.log(paginationInfo)
-        
+    function renderPagination(podcasts){
+        console.log(`entriesCount: ${podcasts.length}`)
+        console.log(`pageSize: ${defaultPageSize}`)
+        var pagesCount = parseInt(podcasts.length / defaultPageSize);
+        console.log(`pagesCount: ${pagesCount}`)
+
         var ul = document.getElementById("pagination_footer");
         //remove pre items
         ul.innerHTML = "";
         //add items        
-        for(var count=0; count<paginationInfo.pagesCount; count ++){
+        for(var count=0; count<pagesCount; count ++){
             var li = document.createElement("li");
             var a = document.createElement('a');
             a.setAttribute('href',"www.google.com");

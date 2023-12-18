@@ -1,8 +1,10 @@
 function EntryPoint() {
 
+    var apiClient = window._context["ApiClient"];
     var homePodcastController = window._context["HomePodcastController"];
 
     this.init = async () => {
+        await apiClient.init()
         homePodcastController.init();
     }
 

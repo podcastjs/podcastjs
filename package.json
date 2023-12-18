@@ -7,14 +7,18 @@
     "js-yaml": "^4.1.0",
     "lokijs": "^1.5.12",
     "mocha": "^10.2.0",
+    "mocha-suppress-logs": "^0.4.1",
     "nodemon": "^3.0.2",
     "nyc": "^15.1.0"
   },
   "scripts": {
-    "dev": "nodemon --watch markdown -e js,md,html,css --ignore database.json server/podcast.js",
+    "dev": "nodemon --watch src --watch theme -e js,md,html,css --ignore database.json src/main/node/podcast.js",
     "build": "node ./server/Index.js --mode build",
     "test": "nyc --reporter=html --reporter=json-summary mocha  'src/test/node/**/*.test.js' --exit --require mocha-suppress-logs && npm run badges",
     "test:verbose": "nyc --reporter=html --reporter=json-summary mocha  'src/test/node/**/*.test.js' --exit  --timeout 100000 && npm run badges",
-    "badges": "badges4cov --source=nyc_json --nyc_json_file_location=./coverage/coverage-summary.json --output_folder=./coverage"
+    "badges": "badges4cov --source=nyc_json --nyc_json_file_location=./coverage/coverage-summary.json --output_folder=.coverage"
+  },
+  "devDependencies": {
+    "uuid": "^9.0.1"
   }
 }

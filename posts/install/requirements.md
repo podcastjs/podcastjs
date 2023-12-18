@@ -1,13 +1,20 @@
-<!--- 
+<!-- 
 
-layout: post
-title: ¿Cómo crear un programa que aprenda por si solo?
-description: "Un programa que aprenda de forma autónoma, es algo muy complejo."
-category: ai
-tags: ["series", "fiction"]
-comments: true 
+layout : post
+title : ¿Cómo crear un programa que aprenda por si solo?
+description : Un programa que aprenda de forma autónoma, es algo muy complejo.
+category : ai
+tags : series, fiction
+comments : true 
+author : Rich Dotcom
+thumbnail_image_url: images/img_3.jpg
+datetime_str: 22 September 2017
+datetime : 2017-08-22
+duration: 0:30:20
+sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
---->
+-->
+
 
 To run docs4all-ligth you need to have the following:
 

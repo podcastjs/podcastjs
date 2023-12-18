@@ -39,12 +39,12 @@
 
           <h3 class="font-weight-light"><a href="{{this.page_url}}">{{this.title}}</a></h3>
           <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{this.author}} <span
-                  class="sep">/</span> {{this.datetime}} <span class="sep">/</span> {{this.duration}}</small></span></div>
+                  class="sep">/</span> {{this.datetime_str}} <span class="sep">/</span> {{this.duration}}</small></span></div>
 
 
           <div class="player">
             <audio id="player2" preload="none" controls style="max-width: 100%">
-              <source src="{{this.mp3_url}}" type="audio/mp3">
+              <source src="{{this.sound_url}}" type="audio/mp3">
             </audio>
           </div>
 
@@ -533,7 +533,7 @@
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy;
               <script data-cfasync="false"
-                src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                ></script>
               <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
               with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
                 target="_blank">Colorlib</a>
@@ -559,10 +559,12 @@
   <script src="js/libraries/aos.js"></script>
   <script src="js/libraries/mediaelement-and-player.min.js"></script>
   <script src="js/libraries/ui-elements.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/techfort/LokiJS/master/src/lokijs.js"></script>
 
   <!-- application -->
-  <script src="js/home-podcast-controller.js"> </script>
-  <script src="js/_entrypoint.js"> </script>
+  <script src="./js/api-client.js"></script>
+  <script src="./js/home-podcast-controller.js"> </script>
+  <script src="./js/_entrypoint.js"> </script>
   
 
 </body>

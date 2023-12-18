@@ -6,10 +6,11 @@ nohup.out
 database.json
 loki.db
 
+posts_
+coverage
 
-
-/coverage/*
-!/coverage/branches.svg
-!/coverage/functions.svg
-!/coverage/lines.svg
-!/coverage/statements.svg
+/.coverage/*
+!/.coverage/branches.svg
+!/.coverage/functions.svg
+!/.coverage/lines.svg
+!/.coverage/statements.svg

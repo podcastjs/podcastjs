@@ -1,13 +1,20 @@
-<!--- 
+<!-- 
 
-layout: post
-title: ¿Cómo crear un programa que aprenda por si solo?
-description: "Un programa que aprenda de forma autónoma, es algo muy complejo."
-category: ai
-tags: ["series", "fiction"]
-comments: true 
+layout : post
+title : ¿Cómo crear un programa que aprenda por si solo?
+description : Un programa que aprenda de forma autónoma, es algo muy complejo.
+category : ai
+tags : series, fiction
+comments : true 
+author : Rich Dotcom
+thumbnail_image_url: images/img_3.jpg
+datetime_str: 23 September 2017
+datetime : 2017-08-23
+duration: 0:30:20
+sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
---->
+-->
+
 
 When running a live site you'll want to set the `PORT` env variable to `80` so you don't need to add `:3000` to the URL.
 This requires root privileges and is not recommended.
