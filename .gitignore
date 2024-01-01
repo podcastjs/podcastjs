@@ -8,6 +8,7 @@ loki.db
 
 posts_
 coverage
+site
 
 /.coverage/*
 !/.coverage/branches.svg

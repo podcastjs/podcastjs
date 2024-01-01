@@ -5,12 +5,12 @@ function HomePodcastController(){
     this.apiClient = window._context["ApiClient"];
     
     this.init = async () => {
-        this.loadPoscastEntries();
+        this.loadPoscastEntries(1);
     }
   
-    this.loadPoscastEntries = async() => {
+    this.loadPoscastEntries = async(pageNumber) => {
 
-        var data = await this.apiClient.findAllPaginated(defaultPageSize, 1);
+        var data = await this.apiClient.findAllPaginated(defaultPageSize, pageNumber);
         renderPosts(data.content);
         renderPagination(data.pagination);
         
@@ -18,16 +18,16 @@ function HomePodcastController(){
         var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
         for (var i = 0; i < total; i++) {
-        new MediaElementPlayer(mediaElements[i], {
-            pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
-            shimScriptAccess: 'always',
-            success: function () {
-            var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-            for (var j = 0; j < targetTotal; j++) {
-                target[j].style.visibility = 'visible';
-            }
-            }
-        });
+            new MediaElementPlayer(mediaElements[i], {
+                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
+                shimScriptAccess: 'always',
+                success: function () {
+                var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
+                for (var j = 0; j < targetTotal; j++) {
+                    target[j].style.visibility = 'visible';
+                }
+                }
+            });
         }
     }
 
@@ -57,14 +57,22 @@ function HomePodcastController(){
         for(var count=0; count<paginationInfo.pagesCount; count ++){
             var li = document.createElement("li");
             var a = document.createElement('a');
-            a.setAttribute('href',"www.google.com");
+            //a.setAttribute('href',"#");
+            a.setAttribute("page-number", count+1);
+            a.style.cursor = "pointer";
             a.innerHTML = count+1; 
             if(count==0) li.classList.add("active");
             li.appendChild(a);
-            ul.appendChild(li); 
+            ul.appendChild(li);             
+            li.addEventListener("click", onPageArrowClick)
         }
        
-    }       
+    }
+
+    onPageArrowClick = (element) =>{
+        var pageNumber = element.target.getAttribute("page-number");
+        this.loadPoscastEntries(new Number(pageNumber));
+    }    
 
   }
   
