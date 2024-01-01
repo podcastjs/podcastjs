@@ -1,6 +1,6 @@
 function HomePodcastController(){
 
-    var defaultPageSize = 2;
+    var defaultPageSize = 4;
 
     this.apiClient = window._context["ApiClient"];
     
@@ -12,7 +12,7 @@ function HomePodcastController(){
 
         var data = await this.apiClient.findAllPaginated(defaultPageSize, pageNumber);
         renderPosts(data.content);
-        renderPagination(data.pagination);
+        renderPagination(data.pagination, pageNumber);
         
         //instantiate mp3 player
         var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
@@ -47,31 +47,56 @@ function HomePodcastController(){
         document.getElementById('podcasts_container').innerHTML = html;
     }   
     
-    function renderPagination(paginationInfo){
+    function renderPagination(paginationInfo, pageNumber){
         console.log(paginationInfo)
         
-        var ul = document.getElementById("pagination_footer");
+        var paginationContainer = document.getElementById("pagination_footer");
         //remove pre items
-        ul.innerHTML = "";
+        paginationContainer.innerHTML = "";
+
+        var ul = document.createElement('ul');
+
+        //add left arrow
+        var liLeft = document.createElement("li");
+        liLeft.style.marginRight = "5px";
+        var aLeft = document.createElement('a');
+        aLeft.setAttribute('href',"#");
+        aLeft.classList.add("icon-keyboard_arrow_left")
+        liLeft.appendChild(aLeft);
+        ul.appendChild(liLeft);    
+
         //add items        
         for(var count=0; count<paginationInfo.pagesCount; count ++){
             var li = document.createElement("li");
+            li.style.marginRight = "5px";
             var a = document.createElement('a');
             //a.setAttribute('href',"#");
             a.setAttribute("page-number", count+1);
             a.style.cursor = "pointer";
             a.innerHTML = count+1; 
-            if(count==0) li.classList.add("active");
+            if(count+1==pageNumber) li.classList.add("active");
             li.appendChild(a);
             ul.appendChild(li);             
-            li.addEventListener("click", onPageArrowClick)
+            li.addEventListener("click", onPageNumberClick)
         }
+
+        //add right arrow
+        var liRight = document.createElement("li");
+        var aRight = document.createElement('a');
+        aRight.setAttribute('href',"#");
+        aRight.classList.add("icon-keyboard_arrow_right")
+        liRight.appendChild(aRight);
+        ul.appendChild(liRight);            
+
+        paginationContainer.appendChild(ul);
        
     }
 
-    onPageArrowClick = (element) =>{
+    onPageNumberClick = (element) =>{
         var pageNumber = element.target.getAttribute("page-number");
         this.loadPoscastEntries(new Number(pageNumber));
+        var paginationHeader = document.getElementById("pagination_header");
+        paginationHeader.focus()
     }    
 
   }
