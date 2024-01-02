@@ -1,8 +1,8 @@
 <!-- 
 
 layout : post
-title : ¿Cómo crear un programa que aprenda por si solo?
-description : Un programa que aprenda de forma autónoma, es algo muy complejo.
+title : Podcasters
+description : To add the podcasters
 category : ai
 tags : series, fiction
 comments : true 

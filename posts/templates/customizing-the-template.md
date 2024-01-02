@@ -1,8 +1,8 @@
 <!-- 
 
 layout : post
-title : ¿Cómo crear un programa que aprenda por si solo?
-description : Un programa que aprenda de forma autónoma, es algo muy complejo.
+title : Single post template
+description : This file is located
 category : ai
 tags : series, fiction
 comments : true 

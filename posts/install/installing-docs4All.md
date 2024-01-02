@@ -1,8 +1,8 @@
 <!-- 
 
 layout : post
-title : ¿Cómo crear un programa que aprenda por si solo?
-description : Un programa que aprenda de forma autónoma, es algo muy complejo.
+title : ¿How to install podcastjs?
+description : Just open a shell and execute.
 category : ai
 tags : series, fiction
 comments : true 
@@ -15,8 +15,7 @@ sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
 -->
 
-Make sure you have met the [minimum requirements](%base_url%/install/requirements) then install
-docs4all-ligth:
+Make sure you have met the [minimum requirements](%base_url%/install/requirements) then install docs4all-ligth:
 
 **Note:** It is recommended to create a new Git repository to store your documentation files and then install docs4all-ligth as a dependency into it. See the [example directory](https://github.com/docs4all/docs4all-ligth/tree/master/example) to see how this is done.
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Podcast &mdash; Colorlib Website Template</title>
+  <title>Podcast.js</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -37,7 +37,7 @@
         <div class="image" style="background-image: url('{{this.thumbnail_image_url}}');"></div>
         <div class="text">
 
-          <h3 class="font-weight-light"><a href="{{this.page_url}}">{{this.title}}</a></h3>
+          <h3 class="font-weight-light"><a href="{{this.post_url}}">{{this.title}}</a></h3>
           <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{this.author}} <span
                   class="sep">/</span> {{this.datetime_str}} <span class="sep">/</span> {{this.duration}}</small></span></div>
 
@@ -72,7 +72,7 @@
 
 
           <div class="col-3">
-            <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span> </a></h1>
+            <h1 class="site-logo"><a href="/" class="h2">Podcast.js<span class="text-primary">.</span> </a></h1>
           </div>
           <div class="col-9">
             <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
@@ -126,7 +126,7 @@
         </div>
 
         <div class="row">
-          <div id="podcasts_container">
+          <div id="podcasts_container" style="width: 100%;">
           </div>
           <div class="container" data-aos="fade-up">
             <div class="row">

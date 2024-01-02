@@ -1,6 +1,6 @@
 function HomePodcastController(){
 
-    var defaultPageSize = 4;
+    var defaultPageSize = 2;
 
     this.apiClient = window._context["ApiClient"];
     
@@ -34,10 +34,18 @@ function HomePodcastController(){
     function renderPosts(podcasts){
         var templateSource = document.getElementById('myTemplate').innerHTML;
         var template = Handlebars.compile(templateSource);
-    
+        
+        //add post_url
+        var newPodcasts = [];
+        for(var podcastInfo of podcasts){
+            var newPodcastInfo = podcastInfo;
+            newPodcastInfo.post_url = "/posts"+podcastInfo.path.replace(".md", ".html")
+            newPodcasts.push(newPodcastInfo)
+        }
+
         // Data in json
         var data = {
-            podcasts: podcasts
+            podcasts: newPodcasts
         };
     
         // Generate html using template and data

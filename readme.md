@@ -60,9 +60,11 @@ npm run dev
 Podcastjs will give a landing page with the recent entries
 
 
-## Current status
+## Home Page
 
-![image](https://github.com/podcastjs/podcastjs/assets/3322836/7b9f6d81-df7c-46c1-8442-e5b5ee895740)
+<p align="center">
+ <img src="https://github.com/podcastjs/podcastjs/assets/3322836/2acac298-73b0-43b5-ac02-c5d87b98694c" width=300>
+</p>
 
 ## Acknowledgments
 
@@ -70,9 +72,6 @@ Podcastjs will give a landing page with the recent entries
 - https://www.flaticon.com/free-icon/voice_3178286
 - <a href="https://www.flaticon.com/free-icons/voice-chat" title="voice chat icons">Voice chat icons created by Uniconlabs - Flaticon</a>
 
-## Themes
-
-- https://github.com/alitahir4024/megapod
 
 ## Roadmap
 
