@@ -17,10 +17,10 @@ function SsrHtmlRender() {
     var rawYamlString = await fs.promises.readFile(path.join(projectBaseLocation, "settings.yaml"), 'utf8')
     const settings = yaml.load(rawYamlString);
 
-    renderPosts(markdownFolderAbsoluteLocation, markdownFilesMetadata,
+    await renderPosts(markdownFolderAbsoluteLocation, markdownFilesMetadata,
       siteFolderAbsoluteLocation, themeLocationAbsoluteLocation, settings);
 
-    renderHomePage(projectBaseLocation, markdownFolderAbsoluteLocation, markdownFilesMetadata,
+    await renderHomePage(projectBaseLocation, markdownFolderAbsoluteLocation, markdownFilesMetadata,
       siteFolderAbsoluteLocation, themeLocationAbsoluteLocation, settings)
   }
 
@@ -35,7 +35,7 @@ function SsrHtmlRender() {
     var renderedHtml = indexTemplate(settings);
     //inser the handlebar template (script) for csr usage
     var podcastListRawTemplateString =  await fs.promises.readFile(path.join(projectBaseLocation, 
-      "src","main","resources","handlebar_template_podcast_list.html"), "utf-8");
+      "theme","handlebar_template_podcast_list.html"), "utf-8");
     renderedHtml = renderedHtml.replace("@handlebars_template_podcas_list", podcastListRawTemplateString)
     //write index page
     await fs.promises.writeFile(path.join(siteFolderAbsoluteLocation, "index.html"), renderedHtml);
@@ -46,19 +46,29 @@ function SsrHtmlRender() {
     siteFolderAbsoluteLocation, themeLocationAbsoluteLocation, settings) {
     //create post folders
     var postFolderAbsoluteLocation = path.join(siteFolderAbsoluteLocation, "posts");
-
+    var publishedPostFolderExists = false;
     try {
-      await fs.promises.access(postFolderAbsoluteLocation, fs.constants.F_OK)
-      await fs.promises.rm(postFolderAbsoluteLocation, { recursive: true });
+      await fs.promises.access(postFolderAbsoluteLocation, fs.constants.F_OK)      
+      publishedPostFolderExists = true;
     } catch (e) {
-      console.log("posts folder was not found");
+      publishedPostFolderExists = false;
     }
 
+    if(publishedPostFolderExists===true){
+      try {
+        await fs.promises.rm(postFolderAbsoluteLocation, { recursive: true });
+      } catch (e) {
+        console.log("Failed to clear the published posts folder: "+postFolderAbsoluteLocation, e);
+        process.exit(1)
+      }
+    }
+    
     await fs.promises.mkdir(postFolderAbsoluteLocation)
 
     var rawTemplate = await fs.promises.readFile(path.join(themeLocationAbsoluteLocation, "single-post.html"), "utf-8");
     var singlePostTemplate = handlebars.compile(rawTemplate);
 
+    console.log("Detected podcasts:")
     for (markdownFileInfo of markdownFilesMetadata) {
       console.log(markdownFileInfo.path)
       var htmlFileAbsoluteLocation = path.join(markdownFolderAbsoluteLocation, markdownFileInfo.path);

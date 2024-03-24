@@ -8,32 +8,30 @@ const path = require("path");
 const copyPromise = util.promisify(fsExtra.copy);
 
 function Publisher(){
-  var projectBaseLocation = process.env.PWD;
-  var siteFolder = process.env.PODCAST_JS_SITE_FOLDER ||"site";
-
-  this.start = async () => {
-    console.log("Base location: "+projectBaseLocation);
-    var themeLocation = path.join(projectBaseLocation, "theme")
-
+  
+  this.start = async (themeLocation, siteFolderLocation) => {
+    
+    var siteFolderExists = false;
     try {
-      await fs.promises.access(themeLocation, fs.constants.F_OK)
-      console.log("custom theme folder was found: "+themeLocation);
+      await fs.promises.access(siteFolderLocation, fs.constants.F_OK)      
+      siteFolderExists = true;
     } catch (e) {
-      console.log("custom theme folder was not found. Default theme will be used");
-      themeLocation = path.join(__dirname,"theme")
-    }
-
-    var siteFullLocation = path.join(projectBaseLocation, siteFolder);
-    try {
-      await fs.promises.access(siteFullLocation, fs.constants.F_OK)
-      await fs.promises.rm(siteFullLocation, { recursive: true });
-    } catch (e) {
-      console.log("custom theme folder was not found. Default theme will be used");
+      siteFolderExists = false;
     }    
 
-    
-    await fs.promises.mkdir(path.join(projectBaseLocation, siteFolder))
-    await copyPromise(themeLocation, path.join(projectBaseLocation, siteFolder))
+    if(siteFolderExists===true){
+      try {
+        await fs.promises.rm(siteFolderLocation, { recursive: true });  
+      } catch (e) {
+        console.log("Failed to clear the site folder: "+siteFolderLocation);
+        console.error(e);
+        process.exit(1);
+      } 
+    }else{
+      await fs.promises.mkdir(siteFolderLocation)
+    }
+        
+    await copyPromise(themeLocation, siteFolderLocation)
 
   }
 }
