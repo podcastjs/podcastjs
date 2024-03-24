@@ -1,15 +1,12 @@
 site_name:         Podcast.js
 description:       java, software, maths, ia, projects ,animes and series.
-home_banner_image: site-logo.png
+home_banner_image_url: https://github.com/podcastjs/podcastjs/assets/3322836/0d8bdbf1-78f0-4728-bcf4-6a6a25487dfe
+home_banner_title: Tell Your Story to the World!!
+home_banner_paragraph: |
+  Join with us! Login or Register. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, ex! 
 disqus_shortname:  jrichardsz-github-io
 base_url:          https://podcastjs.github.io
 about_us_paragraph: A site to share our day-to-day about podcasts.js
-
-# Analytics and webmaster tools stuff goes here
-#google_analytics:
-
-# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-# timezone:    America/New_York
 
 podcasters:
   jrichardsz:
@@ -17,7 +14,6 @@ podcasters:
     avatar_image:			images/person_1.jpg
     short_biography: Software Architect
     email:			you@email.com
-    # Social networking links used in footer. Update and remove as you like.
     twitter_url:        https://twitter.com/JRichardsz
     github_url:         https://github.com/jrichardsz
     stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz
@@ -29,7 +25,6 @@ podcasters:
     avatar_image:			images/person_2.jpg
     short_biography: Sysadmin
     email:			you@email.com
-    # Social networking links used in footer. Update and remove as you like.
     twitter_url:        https://twitter.com/JRichardsz
     github_url:         https://github.com/jrichardsz
     stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz

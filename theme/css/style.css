@@ -988,6 +988,13 @@ a {
 .play-wrap {
   margin-top: -70px; }
 
+.custom-logo {
+  font-size: xx-large;
+  font-weight: bold;
+  color: black;
+}  
+
 @media (max-width: 991.98px) {
   .hero h1 {
     font-size: 40px !important; } }
+

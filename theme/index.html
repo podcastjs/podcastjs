@@ -48,12 +48,10 @@
 
       <div class="container">
         <div class="row align-items-center">
-
-
-          <div class="col-3">
-            <h1 class="site-logo"><a href="/" class="h2">{{site_name}}<span class="text-primary">.</span> </a></h1>
+          <div class="col-4 custom-logo">
+            {{site_name}}
           </div>
-          <div class="col-9">
+          <div class="col-8">
             <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
 
 
@@ -82,12 +80,12 @@
       <div class="row align-items-center text-center text-md-left">
 
         <div class="col-lg-4">
-          <h1 class="mb-3 display-3">Tell Your Story to the World</h1>
-          <p>Join with us! Login or Register. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, ex!
+          <h1 class="mb-3 display-3">{{home_banner_title}}</h1>
+          <p>{{home_banner_paragraph}}
           </p>
         </div>
         <div class="col-lg-8">
-          <img src="images/1x/asset-1.png" alt="Image" class="img-fluid">
+          <img src="{{home_banner_image_url}}" alt="Image" class="img-fluid">
         </div>
       </div>
     </div>

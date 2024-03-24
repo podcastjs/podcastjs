@@ -33,16 +33,14 @@ function HomePodcastController(){
     }
 
     function renderPosts(podcasts){
-        console.log(document.getElementById('myTemplate'))
-        var templateSource = document.getElementById('myTemplate').innerHTML;
-        console.log("templateSource", templateSource)
+        console.log(document.getElementById('handlebar_template_podcast_list'))
+        var templateSource = document.getElementById('handlebar_template_podcast_list').innerHTML;
         var template = Handlebars.compile(templateSource);
         
         //add post_url
         var newPodcasts = [];
         for(var podcastInfo of podcasts){
             var newPodcastInfo = podcastInfo;
-            console.log("newPodcastInfo", newPodcastInfo)
             newPodcastInfo.post_url = "/posts"+podcastInfo.path.replace(".md", ".html")
             newPodcasts.push(newPodcastInfo)
         }
@@ -54,7 +52,6 @@ function HomePodcastController(){
     
         // Generate html using template and data
         var html = template(data);
-        console.log("html", html)
         // Add the result to the DOM
         document.getElementById('podcasts_container').innerHTML = html;
     }   
