@@ -7,8 +7,7 @@ const SsrHtmlRender = require("./SsrHtmlRender.js");
 
 (async ()=> {
 
-    // set the port of our application
-    var port = process.env.PORT || 8080;
+    var port = process.env.PORT || 2708;
     var projectBaseLocation = process.env.PWD;
     var siteFolder = process.env.PODCAST_JS_SITE_FOLDER || "site";
     if(!siteFolder.startsWith("/")){

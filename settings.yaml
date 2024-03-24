@@ -1,0 +1,38 @@
+site_name:         Podcast.js
+description:       java, software, maths, ia, projects ,animes and series.
+home_banner_image: site-logo.png
+disqus_shortname:  jrichardsz-github-io
+base_url:          https://podcastjs.github.io
+about_us_paragraph: A site to share our day-to-day about podcasts.js
+
+# Analytics and webmaster tools stuff goes here
+#google_analytics:
+
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+# timezone:    America/New_York
+
+podcasters:
+  jrichardsz:
+    name:				JRichardsz
+    avatar_image:			images/person_1.jpg
+    short_biography: Software Architect
+    email:			you@email.com
+    # Social networking links used in footer. Update and remove as you like.
+    twitter_url:        https://twitter.com/JRichardsz
+    github_url:         https://github.com/jrichardsz
+    stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz
+    youtube_url:        www.youtube.com/@JRichardsz
+    blog_url:           https://jrichardsz.github.io
+
+  bitmanuc:
+    name:				Bitmanuc
+    avatar_image:			images/person_2.jpg
+    short_biography: Sysadmin
+    email:			you@email.com
+    # Social networking links used in footer. Update and remove as you like.
+    twitter_url:        https://twitter.com/JRichardsz
+    github_url:         https://github.com/jrichardsz
+    stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz
+    youtube_url:        www.youtube.com/@JRichardsz
+    blog_url:           https://jrichardsz.github.io
+

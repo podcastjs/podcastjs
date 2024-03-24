@@ -11,6 +11,7 @@ function HomePodcastController(){
     this.loadPoscastEntries = async(pageNumber) => {
 
         var data = await this.apiClient.findAllPaginated(defaultPageSize, pageNumber);
+        console.log("data", data)
         renderPosts(data.content);
         renderPagination(data.pagination, pageNumber);
         
@@ -32,13 +33,16 @@ function HomePodcastController(){
     }
 
     function renderPosts(podcasts){
+        console.log(document.getElementById('myTemplate'))
         var templateSource = document.getElementById('myTemplate').innerHTML;
+        console.log("templateSource", templateSource)
         var template = Handlebars.compile(templateSource);
         
         //add post_url
         var newPodcasts = [];
         for(var podcastInfo of podcasts){
             var newPodcastInfo = podcastInfo;
+            console.log("newPodcastInfo", newPodcastInfo)
             newPodcastInfo.post_url = "/posts"+podcastInfo.path.replace(".md", ".html")
             newPodcasts.push(newPodcastInfo)
         }
@@ -50,7 +54,7 @@ function HomePodcastController(){
     
         // Generate html using template and data
         var html = template(data);
-    
+        console.log("html", html)
         // Add the result to the DOM
         document.getElementById('podcasts_container').innerHTML = html;
     }   

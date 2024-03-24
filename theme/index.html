@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Podcast.js</title>
+  <title>{{site_name}}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -30,29 +30,8 @@
 <body>
 
   <!-- Handlebars template -->
-  <script id='myTemplate' type='text/x-handlebars-template'>
-
-    {{#each podcasts}}
-      <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
-        <div class="image" style="background-image: url('{{this.thumbnail_image_url}}');"></div>
-        <div class="text">
-
-          <h3 class="font-weight-light"><a href="{{this.post_url}}">{{this.title}}</a></h3>
-          <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{this.author}} <span
-                  class="sep">/</span> {{this.datetime_str}} <span class="sep">/</span> {{this.duration}}</small></span></div>
-
-
-          <div class="player">
-            <audio id="player2" preload="none" controls style="max-width: 100%">
-              <source src="{{this.sound_url}}" type="audio/mp3">
-            </audio>
-          </div>
-
-        </div>
-      </div>   
-    {{/each}}
-  </script>  
-
+  @handlebars_template_podcas_list
+  
   <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -72,7 +51,7 @@
 
 
           <div class="col-3">
-            <h1 class="site-logo"><a href="/" class="h2">Podcast.js<span class="text-primary">.</span> </a></h1>
+            <h1 class="site-logo"><a href="/" class="h2">{{site_name}}<span class="text-primary">.</span> </a></h1>
           </div>
           <div class="col-9">
             <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
@@ -86,8 +65,6 @@
                 <li class="active">
                   <a href="/">Home</a>
                 </li>
-                <li><a href="#">Search</a></li>
-                <li><a href="#">Contact</a></li>
               </ul>
             </nav>
 
@@ -150,42 +127,43 @@
         </div>
         <div class="nonloop-block-13 owl-carousel">
 
-          <div class="text-center p-3 p-md-5 bg-white">
-            <div class="mb-4">            
-              <img src="images/person_1.jpg" alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
-            </div>
-            <div class="">
-              <h3 class="font-weight-light h5">Megan Smith</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
-            </div>
-            <p>
-              <a href="#" class="pl-0 pr-3"><span class="icon-twitter"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-facebook"></span></a>
-            </p>            
-          </div>
+          {{#each podcasters}}
+            <div class="text-center p-3 p-md-5 bg-white">
+              <div class="mb-4">            
+                <img src="{{this.avatar_image}}" alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
+              </div>
+              <div class="">
+                <h3 class="font-weight-light h5">{{this.name}}</h3>
+                <p>{{this.short_biography}}</p>
+              </div>
+              <p>
 
-          <div class="text-center p-3 p-md-5 bg-white">
-            <div class="mb-4">            
-              <img src="images/person_2.jpg" alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
+                {{#if this.github_url}}
+                  <a href="{{this.github_url}}" target="_blank" class="pl-3 pr-3"><span class="icon-github"></span></a>
+                {{/if}}
+                {{#if this.stackoverflow_url}}
+                  <a href="{{this.stackoverflow_url}}" target="_blank" class="pl-3 pr-3"><span class="icon-stack-overflow"></span></a>
+                {{/if}}
+                {{#if this.twitter_url}}
+                  <a href="{{this.twitter_url}}" target="_blank" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                {{/if}}                                
+                {{#if this.youtube_url}}
+                  <a href="{{this.youtube_url}}" target="_blank" class="pl-3 pr-3"><span class="icon-youtube"></span></a>
+                {{/if}}
+                {{#if this.blog_url}}
+                  <a href="{{this.blog_url}}" target="_blank" class="pl-3 pr-3"><span class="icon-web"></span></a>
+                {{/if}}  
+
+              </p>            
             </div>
-            <div class="">
-              <h3 class="font-weight-light h5">Brooke Cagle</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
-            </div>
-            <p>
-              <a href="#" class="pl-0 pr-3"><span class="icon-twitter"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-facebook"></span></a>
-            </p>            
-          </div>
+          {{/each}}          
 
         </div>
         <p></p>
       </div>
     </div>    
 
-    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url(images/hero_bg_1.jpg);"
+    <div style="display: none;" class="site-blocks-cover overlay inner-page-cover" style="background-image: url(images/hero_bg_1.jpg);"
       data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
@@ -210,8 +188,7 @@
         <div class="row align-items-center justify-content-center text-center">
           <div class="col-md-6">
             <h2>About Us</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium animi, odio beatae aspernatur natus
-              recusandae quasi magni eum voluptatem nam!</p>
+            <p>{{about_us_paragraph}}</p>
           </div>
         </div>
 
@@ -220,15 +197,11 @@
             <p>
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy;
-              <script data-cfasync="false"
-                ></script>
-              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
-              with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                target="_blank">Colorlib</a>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              <script data-cfasync="false"></script>
+              <script>document.write(new Date().getFullYear());</script> 
+              , {{site_name}}, All rights reserved
             </p>
           </div>
-
         </div>
       </div>
     </footer>
