@@ -66,6 +66,22 @@ Podcastjs will give a landing page with the recent entries
  <img src="https://github.com/podcastjs/podcastjs/assets/3322836/2acac298-73b0-43b5-ac02-c5d87b98694c" width=300>
 </p>
 
+## Custom site folder
+
+For example, if you are using github.io, a folder called **docs** is required for the static web. 
+
+To do that, set this variable for unix
+
+```
+export PODCAST_JS_SITE_FOLDER_NAME=docs   
+```
+
+and this for windows
+
+
+```
+set PODCAST_JS_SITE_FOLDER_NAME=docs   
+```
 ## Acknowledgments
 
 - https://themewagon.com/themes/free-bootstrap-4-html5-responsive-musical-website-template-podcast/
