@@ -40,10 +40,26 @@ Start as developer
 podcastjs --start
 ```
 
+Go to http://localhost:2708 and you will see something like this
+
+<p align="center">
+ <img src="https://github.com/podcastjs/podcastjs/assets/3322836/2acac298-73b0-43b5-ac02-c5d87b98694c" width=300>
+</p>
+
+## Publish
+
+After the creationof your markdowns and settings, if you need a static site to be hosted in some server, follow these steps
+
 Generate the static site
 
 ```
 podcastjs --publish
+```
+
+By default, it creates a **site** folder. If you need a custom folder:
+
+```
+podcastjs --publish docs
 ```
 
 ## How it works
@@ -68,47 +84,18 @@ sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
 -->
 
+Here you can put your markdown
 
-Want to report a bug, request a feature, contribute or translate docs4all-ligth? At the moment most things can be
-contributed via the main [docs4all-ligth GitHub repository](https://github.com/docs4all/docs4all-ligth).
-
-* [Submit a bug report](https://github.com/docs4all/docs4all-ligth/issues?labels=bug)
-* [Submit a feature request](https://github.com/docs4all/docs4all-ligth/issues?labels=enhancement)
-* [Submit a pull request](https://github.com/docs4all/docs4all-ligth/pulls)
 ```
 
-Then run with:
+## For nodejs developers (contributors)
 
+Clone this repository and execute
 
 ```js
 npm run dev
 ```
 
-Podcastjs will give a landing page with the recent entries
-
-
-## Home Page
-
-<p align="center">
- <img src="https://github.com/podcastjs/podcastjs/assets/3322836/2acac298-73b0-43b5-ac02-c5d87b98694c" width=300>
-</p>
-
-## Custom site folder
-
-For example, if you are using github.io, a folder called **docs** is required for the static web. 
-
-To do that, set this variable for unix
-
-```
-export PODCAST_JS_SITE_FOLDER_NAME=docs   
-```
-
-and this for windows
-
-
-```
-set PODCAST_JS_SITE_FOLDER_NAME=docs   
-```
 ## Acknowledgments
 
 - https://themewagon.com/themes/free-bootstrap-4-html5-responsive-musical-website-template-podcast/
@@ -118,7 +105,7 @@ set PODCAST_JS_SITE_FOLDER_NAME=docs
 
 ## Roadmap
 
-check the issues page
+- Check the issues page
 
 ## Contributors
 

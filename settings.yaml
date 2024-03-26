@@ -11,7 +11,7 @@ about_us_paragraph: A site to share our day-to-day about podcasts.js
 podcasters:
   jrichardsz:
     name:				JRichardsz
-    avatar_image:			images/person_1.jpg
+    avatar_image:			https://avatars0.githubusercontent.com/u/3322836?s=460&v=4
     short_biography: Software Architect
     email:			you@email.com
     twitter_url:        https://twitter.com/JRichardsz
@@ -21,7 +21,7 @@ podcasters:
     blog_url:           https://jrichardsz.github.io
 
   bitmanuc:
-    name:				Bitmanuc
+    name:				Jane Doe
     avatar_image:			images/person_2.jpg
     short_biography: Sysadmin
     email:			you@email.com

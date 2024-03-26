@@ -1,7 +1,9 @@
 {
   "name": "podcastjs",
   "description": "podcastjs",
-  "version": "1.0.1",
+  "version": "1.0.0",
+  "author": "JRichardsz <jrichardsz.java@gmail.com>",
+  "license": "MIT",  
   "main": "src/main/node/Index.js",
   "bin": {
     "podcastjs": "src/main/node/Index.js"

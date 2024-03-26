@@ -16,9 +16,9 @@ sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 -->
 
 
-Want to report a bug, request a feature, contribute or translate docs4all-ligth? At the moment most things can be
-contributed via the main [docs4all-ligth GitHub repository](https://github.com/docs4all/docs4all-ligth).
+Want to report a bug, request a feature, contribute or translate podcastjs? At the moment most things can be
+contributed via the main [podcastjs GitHub repository](https://github.com/podcastjs/podcastjs).
 
-* [Submit a bug report](https://github.com/docs4all/docs4all-ligth/issues?labels=bug)
-* [Submit a feature request](https://github.com/docs4all/docs4all-ligth/issues?labels=enhancement)
-* [Submit a pull request](https://github.com/docs4all/docs4all-ligth/pulls)
+* [Submit a bug report](https://github.com/podcastjs/podcastjs/issues?labels=bug)
+* [Submit a feature request](https://github.com/podcastjs/podcastjs/issues?labels=enhancement)
+* [Submit a pull request](https://github.com/podcastjs/podcastjs/pulls)

@@ -16,5 +16,5 @@ sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 -->
 
 
-Using docs4all-ligth in the wild? We'd love to see it.  
-Add your site to the [docs4all-ligth Showcase](https://github.com/docs4all/docs4all-ligth/wiki/docs4all-ligth-Showcase).
+Using podcastjs in the wild? We'd love to see it.  
+Add your site to the [podcastjs Showcase](https://github.com/podcastjs/podcastjs/wiki/podcastjs-Showcase).

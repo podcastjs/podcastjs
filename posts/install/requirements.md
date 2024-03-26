@@ -16,7 +16,7 @@ sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 -->
 
 
-To run docs4all-ligth you need to have the following:
+To run podcastjs you need to have the following:
 
 * [Node.js](http://nodejs.org) **v10.22.1** (or later)
 
