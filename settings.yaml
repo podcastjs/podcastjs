@@ -1,0 +1,33 @@
+site_name:         Podcast.js
+description:       java, software, maths, ia, projects ,animes and series.
+home_banner_image_url: https://github.com/podcastjs/podcastjs/assets/3322836/0d8bdbf1-78f0-4728-bcf4-6a6a25487dfe
+home_banner_title: Tell Your Story to the World!!
+home_banner_paragraph: |
+  Join with us! Login or Register. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, ex! 
+disqus_shortname:  jrichardsz-github-io
+base_url:          https://podcastjs.github.io
+about_us_paragraph: A site to share our day-to-day about podcasts.js
+
+podcasters:
+  jrichardsz:
+    name:				JRichardsz
+    avatar_image:			https://avatars0.githubusercontent.com/u/3322836?s=460&v=4
+    short_biography: Software Architect
+    email:			you@email.com
+    twitter_url:        https://twitter.com/JRichardsz
+    github_url:         https://github.com/jrichardsz
+    stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz
+    youtube_url:        www.youtube.com/@JRichardsz
+    blog_url:           https://jrichardsz.github.io
+
+  bitmanuc:
+    name:				Jane Doe
+    avatar_image:			images/person_2.jpg
+    short_biography: Sysadmin
+    email:			you@email.com
+    twitter_url:        https://twitter.com/JRichardsz
+    github_url:         https://github.com/jrichardsz
+    stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz
+    youtube_url:        www.youtube.com/@JRichardsz
+    blog_url:           https://jrichardsz.github.io
+

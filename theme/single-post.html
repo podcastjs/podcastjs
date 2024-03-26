@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{{site_name}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900">
+  <link rel="stylesheet" href="/fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src='//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js'>
+  </script>  
+
+</head>
+
+<body>
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <header class="site-navbar py-4" role="banner">
+
+      <div class="container">
+        <div class="row align-items-center">
+
+
+          <div class="col-4 custom-logo">
+            {{site_name}}
+          </div>
+          <div class="col-8">
+            <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
+
+              <div class="d-block d-lg-none ml-md-0 mr-auto"><a href="#"
+                  class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li class="active">
+                  <a href="/">Home</a>
+                </li>
+              </ul>
+            </nav>
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </header>
+
+
+    <div class="site-blocks-cover inner-page-cover bg-light mb-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 text-center">
+            <a href="#">{{this.author}} </a><span class="mx-2">&bullet;</span> {{this.datetime_str}} <span class="mx-2">&bullet;</span> {{this.duration}}
+            <h1 class="mb-3">{{this.title}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container play-wrap">
+      <div class="player mb-5" style="width: 100%;">
+        <audio id="player2" preload="none" controls style="max-width: 100%; width: 100%;">
+          <source src="{{this.sound_url}}" type="audio/mp3">
+          </audio>
+        </div>
+    </div>
+
+    <div class="container">
+      <div id="html-container">
+        @html
+      </div>
+    </div>
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+          <div class="col-md-6">
+            <h2>About Us</h2>
+            <p>{{about_us_paragraph}}</p>
+          </div>
+        </div>
+
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;
+              <script data-cfasync="false"></script>
+              <script>document.write(new Date().getFullYear());</script> 
+              , {{site_name}}, All rights reserved
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+      
+    <!-- libraries -->
+    <script src="/js/libraries/jquery-3.3.1.min.js"></script>
+    <script src="/js/libraries/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/libraries/jquery-ui.js"></script>
+    <script src="/js/libraries/popper.min.js"></script>
+    <script src="/js/libraries/bootstrap.min.js"></script>
+    <script src="/js/libraries/jquery.countdown.min.js"></script>
+    <script src="/js/libraries/jquery.magnific-popup.min.js"></script>
+    <script src="/js/libraries/aos.js"></script>
+    <script src="/js/libraries/mediaelement-and-player.min.js"></script>
+    <script src="/js/libraries/ui-elements.js"></script>
+    
+    <!-- application -->
+    <script src="/js/api-client.js"></script>
+    <script src="/js/home-podcast-controller.js"> </script>
+    <script src="/js/_entrypoint.js"> </script>
+    
+  
+</body>

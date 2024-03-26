@@ -1,0 +1,22 @@
+<script id='handlebar_template_podcast_list' type='text/x-handlebars-template'>
+
+    {{#each podcasts}}
+      <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
+        <div class="image" style="background-image: url('{{this.thumbnail_image_url}}');"></div>
+        <div class="text">
+
+          <h3 class="font-weight-light"><a href="{{this.post_url}}">{{this.title}}</a></h3>
+          <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{this.author}} <span
+                  class="sep">/</span> {{this.datetime_str}} <span class="sep">/</span> {{this.duration}}</small></span></div>
+
+
+          <div class="player">
+            <audio id="player2" preload="none" controls style="max-width: 100%">
+              <source src="{{this.sound_url}}" type="audio/mp3">
+            </audio>
+          </div>
+
+        </div>
+      </div>   
+    {{/each}}
+  </script> 
