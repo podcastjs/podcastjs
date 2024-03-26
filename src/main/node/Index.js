@@ -7,6 +7,8 @@ const Server = require("./Server.js");
 const ExternalSite = require("./ExternalSite.js");
 const { Command } = require('commander');
 const finder = require('find-package-json');
+const chokidar = require('chokidar');
+
 const program = new Command();
 
 (async () => {
@@ -19,7 +21,7 @@ const program = new Command();
     program
         .option('--new-site, --new-site <string>', 'Create a new podcastjs site')
         .option('--s, --start', 'start a local dev server')
-        .option('--p, --publish', 'parse and publish the static web to the configured folder')
+        .option('--p, --publish <string>', 'parse and publish the static web to the configured folder', "site")
 
     program.parse();
     const options = program.opts();
@@ -33,11 +35,11 @@ const program = new Command();
         console.log("create new site")
         var externalSite = new ExternalSite();
         await externalSite.start(options.newSite, process.cwd(), frameworkLocation);
-    } else if (options.start === true || options.publish === true) {
+    } else if (options.start === true || typeof options.publish !== 'undefined') {
         var port = process.env.PORT || 2708;
 
         var projectBaseLocation = process.cwd();
-        var siteFolderName = process.env.PODCAST_JS_SITE_FOLDER_NAME || "site";
+        var siteFolderName = options.publish;
         var themeLocation;
         var markdownFolderAbsoluteLocation = path.join(projectBaseLocation, "posts")
         var siteFolderLocation = path.join(projectBaseLocation, siteFolderName)
@@ -50,46 +52,49 @@ const program = new Command();
             themeLocation = path.join(__dirname, "..", "..", "..", "theme");
         }
 
-        if (options.start === true) {
+        if (frameworkLocation === projectBaseLocation) {
+            //it is runing from inside of framework    
+            var databaseLocation = path.join(themeLocation, "database.json")
+            console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
 
-            if (frameworkLocation === projectBaseLocation) {
+            var publisher = new Publisher();
+            await publisher.start(themeLocation, siteFolderLocation);
 
-                var databaseLocation = path.join(themeLocation, "database.json")
-                console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
-                
-                //it is runing from inside of framework    
-                var publisher = new Publisher();
-                await publisher.start(themeLocation, siteFolderLocation);
+            var builder = new Builder();
+            await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
 
-                var builder = new Builder();
-                await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
-
+            if (options.start === true) {
                 var server = new Server();
                 await server.start(port, siteFolderLocation);
-            } else {
-                //it is runing from outside of framework
-                console.log("Starting local server")
+            }             
+        } else {
+            //it is runing from outside of framework
+            console.log("Starting local server")
 
-                var databaseLocation = path.join(siteFolderLocation, "database.json")
-                console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
+            var databaseLocation = path.join(siteFolderLocation, "database.json")
+            console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
 
-                var publisher = new Publisher();
-                await publisher.start(themeLocation, siteFolderLocation);
+            var publisher = new Publisher();
+            await publisher.start(themeLocation, siteFolderLocation);
 
-                var builder = new Builder();
-                await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
+            var builder = new Builder();
+            await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
 
+            if (options.start === true) {
                 var server = new Server();
                 var expressInstance = await server.start(port, siteFolderLocation);
-                var watching = false;
-                fs.watch(projectBaseLocation,{ recursive: true },  async function (eventType, filename) {
-                    if (eventType !== 'change') return
-                    if(filename && filename.startsWith("site")) return;
-                    console.log("\nRebuilding")
-                    await publisher.start(themeLocation, siteFolderLocation);
-                    await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
-                });
-            }
+    
+                chokidar
+                    .watch(projectBaseLocation, { ignoreInitial: true })
+                    .on('all', async (event, filename) => {
+                        if (filename && filename.startsWith(siteFolderLocation)) return;
+    
+                        console.log("Detected change: " + filename)
+                        console.log("\nRebuilding")
+                        await publisher.start(themeLocation, siteFolderLocation);
+                        await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
+                    })                
+            }    
         }
     }
 

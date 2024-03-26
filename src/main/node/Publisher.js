@@ -1,10 +1,7 @@
-const rimraf = require("rimraf");
 const util = require("util");
 const fs = require("fs");
 const fsExtra = require("fs-extra");
 const path = require("path");
-// const rimrafPromise = util.promisify(rimraf);
-//const mkdirPromise = util.promisify(fs.mkdir);
 const copyPromise = util.promisify(fsExtra.copy);
 
 function Publisher(){

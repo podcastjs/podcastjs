@@ -1,4 +1,3 @@
-const rimraf = require("rimraf");
 const util = require("util");
 const fs = require("fs");
 const fsExtra = require("fs-extra");
@@ -70,7 +69,7 @@ function SsrHtmlRender() {
     var rawTemplate = await fs.promises.readFile(path.join(themeLocationAbsoluteLocation, "single-post.html"), "utf-8");
     var singlePostTemplate = handlebars.compile(rawTemplate);
 
-    console.log("Detected podcasts:")
+    console.log("Markdown to be built:")
     for (markdownFileInfo of markdownFilesMetadata) {
       console.log(markdownFileInfo.path)
       var htmlFileAbsoluteLocation = path.join(markdownFolderAbsoluteLocation, markdownFileInfo.path);
