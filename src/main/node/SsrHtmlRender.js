@@ -30,12 +30,12 @@ function SsrHtmlRender() {
     var rawTemplate = await fs.promises.readFile(path.join(themeLocationAbsoluteLocation, "index.html"), "utf-8");
     var indexTemplate = handlebars.compile(rawTemplate);
 
-    console.log(path.join(themeLocationAbsoluteLocation, "index.html"))
+    console.log("Home page: ", path.join(themeLocationAbsoluteLocation, "index.html"))
     var htmlFileAbsoluteLocation = path.join(projectBaseLocation, "index.html");
     var renderedHtml = indexTemplate(settings);
-    //inser the handlebar template (script) for csr usage
-    var podcastListRawTemplateString =  await fs.promises.readFile(path.join(projectBaseLocation, 
-      "theme","handlebar_template_podcast_list.html"), "utf-8");
+    //insert the handlebar template (script) for csr usage
+    var podcastListRawTemplateString =  await fs.promises.readFile(path.join(themeLocationAbsoluteLocation,
+      "handlebar_template_podcast_list.html"), "utf-8");
     renderedHtml = renderedHtml.replace("@handlebars_template_podcas_list", podcastListRawTemplateString)
     //write index page
     await fs.promises.writeFile(path.join(siteFolderAbsoluteLocation, "index.html"), renderedHtml);
@@ -51,12 +51,14 @@ function SsrHtmlRender() {
       await fs.promises.access(postFolderAbsoluteLocation, fs.constants.F_OK)      
       publishedPostFolderExists = true;
     } catch (e) {
-      publishedPostFolderExists = false;
+      if(e.code!="ENOENT")console.log(e);
+      publishedPostFolderExists = false;      
     }
 
     if(publishedPostFolderExists===true){
       try {
         await fs.promises.rm(postFolderAbsoluteLocation, { recursive: true });
+        console.log("cleaned "+postFolderAbsoluteLocation)
       } catch (e) {
         console.log("Failed to clear the published posts folder: "+postFolderAbsoluteLocation, e);
         process.exit(1)

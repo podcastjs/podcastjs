@@ -1,0 +1,12 @@
+{
+  "name": "changeme",
+  "description": "changeme",
+  "version": "1.0.0",
+  "dependencies": {
+    "podcastjs": "github:/podcastjs/podcastjs#1.0.0-snapshot"
+  },
+  "scripts": {
+    "dev": "nodemon --watch posts -e md --watch ./settings.yaml --ignore database.json src/main/node/Index.js --start",
+    "publish": "podcastjs --publish"    
+  }
+}

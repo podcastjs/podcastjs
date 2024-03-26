@@ -1,41 +1,96 @@
 #!/usr/bin/env node
-// const Server = require("./Server.js");
-// const Publisher = require("./Publisher.js");
+const path = require('path');
+const fs = require('fs');
+const Publisher = require("./Publisher.js");
 const Builder = require("./Builder.js");
+const Server = require("./Server.js");
+const ExternalSite = require("./ExternalSite.js");
 const { Command } = require('commander');
+const finder = require('find-package-json');
 const program = new Command();
 
-var options;
+(async () => {
 
-if(process.env.mode=="start"){
-  options = {
-    mode:"start"
-  }
-}else{
+    program
+        .name('podcastjs')
+        .description('static site generator for podcasters')
+        .version('1.0.0');
 
-  program
-  .name('podcast')
-  .description('static site generator for podcasters')
-  .version('1.0.0');
+    program
+        .option('--new-site, --new-site <string>', 'Create a new podcastjs site')
+        .option('--s, --start', 'start a local dev server')
+        .option('--p, --publish', 'parse and publish the static web to the configured folder')
 
-  program
-  .requiredOption('-m, --mode <string>', 'start,publish,build')
-  .option('-l, --logo <string>', 'a jpg or png, local file')
-  program.parse();
-  options = program.opts();
-}
+    program.parse();
+    const options = program.opts();
 
-if(options.mode === 'start'){
-  var server = new Server();
-  server.start()
-}else if(options.mode === 'build'){
-  var builder= new Builder();
-  var projectBaseLocation = process.env.INIT_CWD;
-  var markdownFolderName = process.env.MARKDOWN_FOLDER_NAME ||  "posts";  
-  builder.start(projectBaseLocation, markdownFolderName);
-}else if(options.mode === 'publish'){
-  var publisher= new Publisher();
-  publisher.start();
-}else{
-  console.log("Podcast does not support this argument: "+options.mode);
-}
+    console.log("Shell arguments", options)
+
+    var f = finder(__filename);
+    var frameworkLocation = path.dirname(f.next().filename);
+
+    if (typeof options.newSite !== 'undefined') {
+        console.log("create new site")
+        var externalSite = new ExternalSite();
+        await externalSite.start(options.newSite, process.cwd(), frameworkLocation);
+    } else if (options.start === true || options.publish === true) {
+        var port = process.env.PORT || 2708;
+
+        var projectBaseLocation = process.cwd();
+        var siteFolderName = process.env.PODCAST_JS_SITE_FOLDER_NAME || "site";
+        var themeLocation;
+        var markdownFolderAbsoluteLocation = path.join(projectBaseLocation, "posts")
+        var siteFolderLocation = path.join(projectBaseLocation, siteFolderName)
+
+        try {
+            await fs.promises.access(path.join(projectBaseLocation, "theme"), fs.constants.F_OK)
+            themeLocation = path.join(projectBaseLocation, "theme");
+        } catch (e) {
+            //external theme folder was not found. Default will be used
+            themeLocation = path.join(__dirname, "..", "..", "..", "theme");
+        }
+
+        if (options.start === true) {
+
+            if (frameworkLocation === projectBaseLocation) {
+
+                var databaseLocation = path.join(themeLocation, "database.json")
+                console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
+                
+                //it is runing from inside of framework    
+                var publisher = new Publisher();
+                await publisher.start(themeLocation, siteFolderLocation);
+
+                var builder = new Builder();
+                await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
+
+                var server = new Server();
+                await server.start(port, siteFolderLocation);
+            } else {
+                //it is runing from outside of framework
+                console.log("Starting local server")
+
+                var databaseLocation = path.join(siteFolderLocation, "database.json")
+                console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
+
+                var publisher = new Publisher();
+                await publisher.start(themeLocation, siteFolderLocation);
+
+                var builder = new Builder();
+                await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
+
+                var server = new Server();
+                var expressInstance = await server.start(port, siteFolderLocation);
+                var watching = false;
+                fs.watch(projectBaseLocation,{ recursive: true },  async function (eventType, filename) {
+                    if (eventType !== 'change') return
+                    if(filename && filename.startsWith("site")) return;
+                    console.log("\nRebuilding")
+                    await publisher.start(themeLocation, siteFolderLocation);
+                    await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
+                });
+            }
+        }
+    }
+
+})();

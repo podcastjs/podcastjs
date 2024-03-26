@@ -12,8 +12,16 @@ function Server(){
         res.sendFile(path.join(absoluteSiteFolder, 'index.html'));
     });
 
-    await app.listen(port);
-    console.log('Podcast.js is running on ' + port);
+    // await app.listen(port);
+    // console.log('Podcast.js is running on ' + port);
+
+    return new Promise((resolve, reject) => {
+      server = app.listen(port, () => {
+        console.log('Podcast.js is running on ' + port);
+        resolve(server);
+      });
+    });
+
   }
 }
 

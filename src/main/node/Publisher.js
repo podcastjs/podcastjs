@@ -22,6 +22,7 @@ function Publisher(){
     if(siteFolderExists===true){
       try {
         await fs.promises.rm(siteFolderLocation, { recursive: true });  
+        console.log("Success purge: "+siteFolderLocation)
       } catch (e) {
         console.log("Failed to clear the site folder: "+siteFolderLocation);
         console.error(e);

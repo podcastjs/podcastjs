@@ -19,6 +19,33 @@ A simple static site generator for podcasters. Made with love
 - Markdown files
 - Mp3 or wav public urls
 
+## Demo
+
+Install the tool
+
+```
+npm install -g github:/podcastjs/podcastjs
+```
+
+Create new site
+
+```
+podcastjs --new-site acme
+cd ./acme
+```
+
+Start as developer
+
+```
+podcastjs --start
+```
+
+Generate the static site
+
+```
+podcastjs --publish
+```
+
 ## How it works
 
 Only add any markdown file inside the posts folder with a content like this:
