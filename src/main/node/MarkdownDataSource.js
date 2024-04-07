@@ -81,6 +81,15 @@ function MarkdownDataSource() {
         if (file != "index.md" && file.endsWith(".md")) {
           let id = this.next();
           let meta = this.getMetaForMarkdownIfExist(dir + file);
+          if(meta.sound_url){
+            if(meta.sound_url.includes(";")){
+              var parts = meta.sound_url.split(";")
+              var key = `sound_url_${parts[1].trim().toLowerCase()}`
+              meta[key] = parts[0].trim()
+            }else{
+              meta.sound_url_en = meta.sound_url
+            }
+          }          
           this.getDocuments().insert({
             ...{
               "path": this.getFixedPath(this.getDocumentsBaseDir(), dir + file),

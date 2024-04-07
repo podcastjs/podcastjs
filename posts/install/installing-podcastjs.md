@@ -8,10 +8,10 @@ tags : series, fiction
 comments : true 
 author : Rich Dotcom
 thumbnail_image_url: images/img_3.jpg
-datetime_str: 24 September 2017
+datetime_str: 24 August 2017
 datetime : 2017-08-24
 duration: 0:30:20
-sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+sound_url: https://github.com/infinite-devops/infinite-devops.github.io/assets/3322836/42f322f8-7f13-47ca-8b60-68d8cf340cf5 ; es
 
 -->
 

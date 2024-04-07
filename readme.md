@@ -101,6 +101,7 @@ npm run dev
 - https://themewagon.com/themes/free-bootstrap-4-html5-responsive-musical-website-template-podcast/
 - https://www.flaticon.com/free-icon/voice_3178286
 - <a href="https://www.flaticon.com/free-icons/voice-chat" title="voice chat icons">Voice chat icons created by Uniconlabs - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/spanish" title="spanish icons">Spanish icons created by Freepik - Flaticon</a>
 
 
 ## Roadmap

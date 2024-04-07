@@ -1,15 +1,17 @@
 function HomePodcastController() {
 
-    var defaultPageSize = 2;
+    var defaultPageSize = 10;
+
+    var currentPageIndex = 1;
+    var pagesCount =  0;
 
     this.apiClient = window._context["ApiClient"];
 
     this.init = async () => {
-        this.loadPoscastEntries(1);
+        this.loadPodcastEntries(1);
     }
 
-    this.loadPoscastEntries = async (pageNumber) => {
-
+    this.loadPodcastEntries = async (pageNumber) => {
         var data = await this.apiClient.findAllPaginated(defaultPageSize, pageNumber);
         renderPosts(data.content);
         renderPagination(data.pagination, pageNumber);
@@ -65,11 +67,14 @@ function HomePodcastController() {
         var liLeft = document.createElement("li");
         liLeft.style.marginRight = "5px";
         var aLeft = document.createElement('a');
-        aLeft.setAttribute('href', "#");
+        // aLeft.setAttribute('href', "#");
         aLeft.classList.add("icon-keyboard_arrow_left")
+        aLeft.style.cursor = "pointer";
         liLeft.appendChild(aLeft);
+        liLeft.addEventListener("click", onLeftArrowClick)
         ul.appendChild(liLeft);
 
+        pagesCount = paginationInfo.pagesCount;
         //add items        
         for (var count = 0; count < paginationInfo.pagesCount; count++) {
             var li = document.createElement("li");
@@ -88,21 +93,42 @@ function HomePodcastController() {
         //add right arrow
         var liRight = document.createElement("li");
         var aRight = document.createElement('a');
-        aRight.setAttribute('href', "#");
+        // aRight.setAttribute('href', "#");
         aRight.classList.add("icon-keyboard_arrow_right")
+        aRight.style.cursor = "pointer";
         liRight.appendChild(aRight);
+        liRight.addEventListener("click", onRigthArrowClick)
         ul.appendChild(liRight);
 
         paginationContainer.appendChild(ul);
+
+        currentPageIndex = pageNumber;
 
     }
 
     onPageNumberClick = (element) => {
         var pageNumber = element.target.getAttribute("page-number");
-        this.loadPoscastEntries(new Number(pageNumber));
+        currentPageIndex = pageNumber;
+        this.loadPodcastEntries(new Number(pageNumber));
         var paginationHeader = document.getElementById("pagination_header");
         paginationHeader.focus()
     }
+
+    onLeftArrowClick = (element) => {
+        element.stopPropagation();
+        if(currentPageIndex==1) return;
+        this.loadPodcastEntries(new Number(currentPageIndex-1));
+        var paginationHeader = document.getElementById("pagination_header");
+        paginationHeader.focus()
+    }  
+    
+    onRigthArrowClick = async (element) => {
+        if(currentPageIndex == pagesCount) return;
+        this.loadPodcastEntries(new Number(currentPageIndex+1));
+        var paginationHeader = document.getElementById("pagination_header");
+        console.log(paginationHeader)
+        paginationHeader.focus()
+    }     
 
 }
 

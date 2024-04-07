@@ -9,12 +9,33 @@
           <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{this.author}} <span
                   class="sep">/</span> {{this.datetime_str}} <span class="sep">/</span> {{this.duration}}</small></span></div>
 
+          {{#if this.sound_url_en}}
+            <div class="player">
+              <div style="width: 10%; float:left; background-image: url('./images/eng_50x50.png');background-repeat: no-repeat;background-position: left;background-size: contain;" >
+              &#8203;
+              </div>
+              <div style="width: 90%; float:right">
+              <audio id="player2" preload="none" controls style="max-width: 100%">
+                <source src="{{this.sound_url_en}}" type="video/webm">
+              </audio>
+              </div>
+            </div>
+          {{/if}}
 
+          {{#if this.sound_url_es}}
+          <br><br>
           <div class="player">
-            <audio id="player2" preload="none" controls style="max-width: 100%">
-              <source src="{{this.sound_url}}" type="audio/mp3">
-            </audio>
+            <div style="width: 10%; float:left; background-image: url('./images/esp_50x50.png');background-repeat: no-repeat;background-position: left;background-size: contain;" >
+              &#8203;
+             </div>
+             <div style="width: 90%; float:right">
+              <audio id="player2" preload="none" controls style="max-width: 100%">
+                <source src="{{this.sound_url_es}}" type="video/webm">
+              </audio>
+             </div>
           </div>
+          {{/if}}
+          
 
         </div>
       </div>   

@@ -3,7 +3,7 @@
   "description": "podcastjs",
   "version": "1.0.0",
   "author": "JRichardsz <jrichardsz.java@gmail.com>",
-  "license": "MIT",  
+  "license": "MIT",
   "main": "src/main/node/Index.js",
   "bin": {
     "podcastjs": "src/main/node/Index.js"

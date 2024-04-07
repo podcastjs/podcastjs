@@ -912,6 +912,7 @@ a {
   border-radius: 50%; }
 
 .player {
+  margin-bottom: 5px;
   position: relative; }
   .player img {
     max-width: 100px;
