@@ -1,11 +1,18 @@
 function EntryPoint() {
-
-    var apiClient = window._context["ApiClient"];
+    
     var homePodcastController = window._context["HomePodcastController"];
 
     this.init = async () => {
-        await apiClient.init()
-        homePodcastController.init();
+        var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+        if(context == ""){
+            context = "home";
+        }
+        console.log("context: "+context)
+        console.log("window._context", window._context)
+        switch (context){
+            case "home" : homePodcastController.init();
+        }
+        
     }
 
     $(document).ready(() => {

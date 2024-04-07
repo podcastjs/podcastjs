@@ -11,7 +11,7 @@ thumbnail_image_url: images/img_3.jpg
 datetime_str: 17 August 2017
 datetime : 2017-08-17
 duration: 0:30:20
-sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3 ; en
+sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
 -->
 

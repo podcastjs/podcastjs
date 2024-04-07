@@ -8,6 +8,7 @@ function HomePodcastController() {
     this.apiClient = window._context["ApiClient"];
 
     this.init = async () => {
+        await this.apiClient.init();
         this.loadPodcastEntries(1);
     }
 
@@ -67,7 +68,6 @@ function HomePodcastController() {
         var liLeft = document.createElement("li");
         liLeft.style.marginRight = "5px";
         var aLeft = document.createElement('a');
-        // aLeft.setAttribute('href', "#");
         aLeft.classList.add("icon-keyboard_arrow_left")
         aLeft.style.cursor = "pointer";
         liLeft.appendChild(aLeft);
@@ -80,7 +80,6 @@ function HomePodcastController() {
             var li = document.createElement("li");
             li.style.marginRight = "5px";
             var a = document.createElement('a');
-            //a.setAttribute('href',"#");
             a.setAttribute("page-number", count + 1);
             a.style.cursor = "pointer";
             a.innerHTML = count + 1;
@@ -93,7 +92,6 @@ function HomePodcastController() {
         //add right arrow
         var liRight = document.createElement("li");
         var aRight = document.createElement('a');
-        // aRight.setAttribute('href', "#");
         aRight.classList.add("icon-keyboard_arrow_right")
         aRight.style.cursor = "pointer";
         liRight.appendChild(aRight);
@@ -123,10 +121,10 @@ function HomePodcastController() {
     }  
     
     onRigthArrowClick = async (element) => {
-        if(currentPageIndex == pagesCount) return;
+        element.stopPropagation();
+        if(currentPageIndex === pagesCount) return;
         this.loadPodcastEntries(new Number(currentPageIndex+1));
         var paginationHeader = document.getElementById("pagination_header");
-        console.log(paginationHeader)
         paginationHeader.focus()
     }     
 

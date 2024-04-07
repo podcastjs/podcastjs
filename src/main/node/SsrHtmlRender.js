@@ -76,9 +76,7 @@ function SsrHtmlRender() {
       var rawMarkdown = await fs.promises.readFile(htmlFileAbsoluteLocation, "utf-8");
       const result = md.render(markdownFileInfo.text);
       var data = {
-        "author": markdownFileInfo.author, "datetime_str": markdownFileInfo.datetime_str,
-        "duration": markdownFileInfo.duration, "title": markdownFileInfo.title,
-        "sound_url": markdownFileInfo.sound_url,
+        ...markdownFileInfo,
         "site_name": settings.site_name, "about_us_paragraph": settings.about_us_paragraph
       };
       var renderedHtml = singlePostTemplate(data);

@@ -43,12 +43,14 @@ function ApiClient() {
 
         return second.getTime() - first.getTime()
       });
+      var pagesCount = Math.trunc(allItems.length / pageSize);
+      if(pagesCount==0) pagesCount = 1;
 
       var result = {
         "content": paginate(allItems, pageSize, pageNumber),
         "pagination": {
           "totalElements": allItems.length,
-          "pagesCount": allItems.length / pageSize,
+          "pagesCount": pagesCount,
           "pageNumber": pageNumber,
           "pageSize": pageSize
         }

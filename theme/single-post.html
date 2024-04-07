@@ -69,7 +69,6 @@
 
     </header>
 
-
     <div class="site-blocks-cover inner-page-cover bg-light mb-5">
       <div class="container">
         <div class="row align-items-center">
@@ -83,13 +82,39 @@
 
     <div class="container play-wrap">
       <div class="player mb-5" style="width: 100%;">
-        <audio id="player2" preload="none" controls style="max-width: 100%; width: 100%;">
-          <source src="{{this.sound_url}}" type="video/webm">
-        </audio>
+        {{#if this.sound_url_en}}
+        <br><br>
+        <div>
+          <div style="width: 10%; float:left; background-image: url('/images/languages/en.png');background-repeat: no-repeat;background-position: left;background-size: contain;" >
+            &#8203;
+          </div>
+          <div style="width: 90%; float:right">
+            <audio id="player2" preload="none" controls style="max-width: 100%; width: 100%;">
+              <source src="{{this.sound_url_en}}" type="video/webm">
+            </audio>
+          </div>           
+        </div>
+        {{/if}}
+        {{#if this.sound_url_es}}
+        <br><br>
+        <div>
+          <div style="width: 10%; float:left; background-image: url('/images/languages/es.png');background-repeat: no-repeat;background-position: left;background-size: contain;" >
+            &#8203;
+          </div>
+          <div style="width: 90%; float:right">
+            <audio id="player2" preload="none" controls style="max-width: 100%; width: 100%;">
+              <source src="{{this.sound_url_es}}" type="video/webm">
+            </audio>
+          </div>           
+        </div>
+        {{/if}}
+
       </div>
+
     </div>
 
     <div class="container">
+      <br><br>
       <div id="html-container">
         @html
       </div>
@@ -130,7 +155,7 @@
     <script src="/js/libraries/jquery.magnific-popup.min.js"></script>
     <script src="/js/libraries/aos.js"></script>
     <script src="/js/libraries/mediaelement-and-player.min.js"></script>
-    <script src="/js/libraries/ui-elements.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/techfort/LokiJS/master/src/lokijs.js"></script>
     
     <!-- application -->
     <script src="/js/api-client.js"></script>
