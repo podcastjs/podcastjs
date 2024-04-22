@@ -11,7 +11,15 @@ thumbnail_image_url: images/img_3.jpg
 datetime_str: 18 August 2017
 datetime : 2017-08-18
 duration: 0:30:20
-sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+
+sounds:
+  es : 
+    type : vocaroo_url
+    value : https://vocaroo.com/embed/1jkkNDCvZhyR?autoplay=0
+  en : 
+    type : vocaroo_url
+    value : https://vocaroo.com/embed/1jkkNDCvZhyR?autoplay=0
+
 -->
 
 

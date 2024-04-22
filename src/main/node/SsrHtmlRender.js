@@ -13,6 +13,10 @@ function SsrHtmlRender() {
   this.start = async (projectBaseLocation, markdownFolderAbsoluteLocation, markdownFilesMetadata,
     siteFolderAbsoluteLocation, themeLocationAbsoluteLocation) => {
 
+    handlebars.registerHelper('if_strint_eq', function(arg1, arg2, options) {
+        return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    });  
+
     var rawYamlString = await fs.promises.readFile(path.join(projectBaseLocation, "settings.yaml"), 'utf8')
     const settings = yaml.load(rawYamlString);
 
@@ -34,7 +38,7 @@ function SsrHtmlRender() {
     var renderedHtml = indexTemplate(settings);
     //insert the handlebar template (script) for csr usage
     var podcastListRawTemplateString =  await fs.promises.readFile(path.join(themeLocationAbsoluteLocation,
-      "handlebar_template_podcast_list.html"), "utf-8");
+      "podcast_list.html"), "utf-8");
     renderedHtml = renderedHtml.replace("@handlebars_template_podcas_list", podcastListRawTemplateString)
     //write index page
     await fs.promises.writeFile(path.join(siteFolderAbsoluteLocation, "index.html"), renderedHtml);

@@ -1,0 +1,65 @@
+<script id='handlebar_template_podcast_list' type='text/x-handlebars-template'>
+
+    {{#each podcasts}}
+      <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
+        <div class="image" style="background-image: url('{{this.thumbnail_image_url}}');"></div>
+        <div class="text">
+
+          <h3 class="font-weight-light"><a href="{{this.post_url}}">{{this.title}}</a></h3>
+          <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{this.author}} <span
+                  class="sep">/</span> {{this.datetime_str}} <span class="sep">/</span> {{this.duration}}</small></span></div>
+
+          {{#if this.sounds.en}}
+            <div class="">
+              {{#if_strint_eq this.sounds.en.type "simple_url"}}
+              <div style="width: 10%; float:left" >
+                <img src="./images/languages/en.png" class="language_icon" style="margin-top: 5px;"/>
+              </div>
+              <div style="width: 90%; float:right">
+                <audio id="player2" preload="none" controls style="max-width: 100%" height="60">
+                  <source src="{{this.sounds.en.value}}" type="video/webm">
+                </audio>                
+              </div>
+              {{/if_strint_eq}}
+              {{#if_strint_eq this.sounds.en.type "vocaroo_url"}}
+              <div style="width: 10%; float:left" >
+                <img src="./images/languages/en.png" class="language_icon"/>
+              </div>
+              <div style="width: 90%; float:right">
+                <iframe width="100%" height="60" src="{{this.sounds.en.value}}" 
+                  frameborder="0" allow="autoplay"></iframe>             
+              </div>              
+              {{/if_strint_eq}} 
+            </div>
+          {{/if}}
+
+          {{#if this.sounds.es}}
+            <br><br>
+            <div class="">
+              {{#if_strint_eq this.sounds.es.type "simple_url"}}
+              <div style="width: 10%; float:left" >
+                <img src="./images/languages/es.png" class="language_icon" style="margin-top: 5px;"/>
+              </div>
+              <div style="width: 90%; float:right">
+                <audio id="player2" preload="none" controls style="max-width: 100%" height="60">
+                  <source src="{{this.sounds.es.value}}" type="video/webm">
+                </audio>                
+              </div>
+              {{/if_strint_eq}}
+              {{#if_strint_eq this.sounds.es.type "vocaroo_url"}}
+              <div style="width: 10%; float:left" >
+                <img src="./images/languages/es.png" class="language_icon"/>
+              </div>
+              <div style="width: 90%; float:right">
+                <iframe width="100%" height="60" src="{{this.sounds.es.value}}" 
+                  frameborder="0" allow="autoplay"></iframe>             
+              </div>              
+              {{/if_strint_eq}} 
+            </div>
+          {{/if}}
+          
+
+        </div>
+      </div>   
+    {{/each}}
+  </script> 
