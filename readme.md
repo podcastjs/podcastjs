@@ -48,7 +48,7 @@ Go to http://localhost:2708 and you will see something like this
 
 ## Publish
 
-After the creationof your markdowns and settings, if you need a static site to be hosted in some server, follow these steps
+After the creation of your markdowns and settings, if you need a static site to be hosted in some server, follow these steps
 
 Generate the static site
 
@@ -80,13 +80,10 @@ thumbnail_image_url: images/img_3.jpg
 datetime_str: 20 August 2017
 datetime : 2017-08-20
 duration: 0:30:20
-
-sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
-
-sounds:
-  en : 
-    type : simple_url
-    value : http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3   
+sound:
+  type : simple_url
+  value : http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+  language: en
 
 -->
 

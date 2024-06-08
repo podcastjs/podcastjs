@@ -54,7 +54,7 @@ const program = new Command();
 
         if (frameworkLocation === projectBaseLocation) {
             //it is runing from inside of framework    
-            var databaseLocation = path.join(themeLocation, "database.json")
+            var databaseLocation = path.join(siteFolderLocation, "database.json")
             console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
 
             var publisher = new Publisher();
