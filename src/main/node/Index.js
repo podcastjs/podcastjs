@@ -74,11 +74,11 @@ const program = new Command();
             var databaseLocation = path.join(siteFolderLocation, "database.json")
             console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
 
-            var publisher = new Publisher();
-            await publisher.start(themeLocation, siteFolderLocation);
-
             var builder = new Builder();
             await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
+
+            var publisher = new Publisher();
+            await publisher.start(themeLocation, siteFolderLocation);
 
             if (options.start === true) {
                 var server = new Server();

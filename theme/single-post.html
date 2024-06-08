@@ -81,59 +81,20 @@
     </div>
 
     <div class="container play-wrap">
-      <div class="mb-5" style="width: 100%;">
-      {{#if this.sounds.en}}
-      <br><br>
-        <div class="">
-          {{#if_strint_eq this.sounds.en.type "simple_url"}}
-          <div style="width: 10%; float:left" >
-            <img src="/images/languages/en.png" class="language_icon_single_post"/>
-          </div>
-          <div style="width: 90%; float:right">
-            <audio preload="none" controls style="width: 100%" height="60">
-              <source src="{{this.sounds.en.value}}" type="video/webm">
+      <div class="player mb-5" style="width: 100%;">
+        {{#if this.sound}}
+          {{#if_strint_eq this.sound.type "simple_url"}}
+            <audio id="player2" preload="none" controls style="width: 100%" height="60">
+              <source src="{{this.sound.value}}" type="video/webm">
             </audio>                
-          </div>
           {{/if_strint_eq}}
-          {{#if_strint_eq this.sounds.en.type "vocaroo_url"}}
-          <div style="width: 10%; float:left" >
-            <img src="/images/languages/en.png" class="language_icon"/>
-          </div>
-          <div style="width: 90%; float:right">
-            <iframe width="100%" height="60" src="{{this.sounds.en.value}}" 
-              frameborder="0" allow="autoplay"></iframe>             
-          </div>              
+          {{#if_strint_eq this.sound.type "vocaroo_url"}}
+            <iframe width="100%" height="60" src="{{this.sound.value}}" 
+              frameborder="0" allow="autoplay">
+            </iframe>             
           {{/if_strint_eq}} 
-        </div>
-      {{/if}}
-
-      {{#if this.sounds.es}}
-      <br><br>
-        <div class="">
-          {{#if_strint_eq this.sounds.es.type "simple_url"}}
-          <div style="width: 10%; float:left" >
-            <img src="/images/languages/es.png" class="language_icon_single_post"/>
-          </div>
-          <div style="width: 90%; float:right">
-            <audio preload="none" controls style="width: 100%" height="60">
-              <source src="{{this.sounds.es.value}}" type="video/webm">
-            </audio>                
-          </div>
-          {{/if_strint_eq}}
-          {{#if_strint_eq this.sounds.es.type "vocaroo_url"}}
-          <div style="width: 10%; float:left" >
-            <img src="/images/languages/es.png" class="language_icon"/>
-          </div>
-          <div style="width: 90%; float:right">
-            <iframe width="100%" height="60" src="{{this.sounds.es.value}}" 
-              frameborder="0" allow="autoplay"></iframe>             
-          </div>              
-          {{/if_strint_eq}} 
-        </div>
-      {{/if}}      
-
+        {{/if}}        
       </div>
-
     </div>
 
     <div class="container">
