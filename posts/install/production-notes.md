@@ -13,7 +13,7 @@ datetime : 2017-08-23
 duration: 0:30:20
 sound:
   type : simple_url
-  value : https://vocaroo.com/embed/1jkkNDCvZhyR?autoplay=0
+  value : https://pages.cs.wisc.edu/~cain/mp3/velveteens/bitter.mp3
   language: es        
 
 -->

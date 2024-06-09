@@ -13,7 +13,7 @@ datetime : 2017-08-22
 duration: 0:30:20
 sound:
   type : simple_url
-  value : https://vocaroo.com/embed/1jkkNDCvZhyR?autoplay=0
+  value : https://file-examples.com/storage/fe3cb26995666504a8d6180/2017/11/file_example_MP3_2MG.mp3
   language: en        
 
 

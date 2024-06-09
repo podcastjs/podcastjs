@@ -11,7 +11,7 @@
   <img src="./theme/favicon.png" width=150>  
 </p>
 
-A simple static site generator for podcasters. Made with love
+A simple static site generator for podcasters. Made with love <3
 
 ## Requirements
 
@@ -20,6 +20,15 @@ A simple static site generator for podcasters. Made with love
 - Mp3 or wav public urls
 
 ## Demo
+
+- http://podcastjs-demo-01.42web.io
+  - Hosted anywhere
+  - source: https://github.com/podcastjs/podcastjs-demo
+- https://podcastjs.github.io
+  - Hosted with github page
+  - source: https://github.com/podcastjs/podcastjs.github.io
+
+## Run it
 
 Install the tool
 
@@ -62,9 +71,9 @@ By default, it creates a **site** folder. If you need a custom folder:
 podcastjs --publish --output=docs
 ```
 
-## How it works
+## How to add posts?
 
-Add any markdown file inside the posts folder with a content like this:
+Just add markdown files inside the posts folder with a content like this:
 
 ```
 <!-- 
@@ -89,18 +98,47 @@ sound:
 
 Here you can put your markdown!!!
 
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
 ```
 
-And  podcast.js will render like this
+And podcast.js will render as
 
 ![image](https://github.com/podcastjs/podcastjs/assets/3322836/6c0c4295-5727-456e-b846-b2fab18e8f7b)
 
-## Sound files hosts
+## How to host your audio files?
 
 We suppport the following sound hosts:
 
-- [Vocaroo](https://github.com/podcastjs/podcastjs/wiki/Vocaroo)
-- The most simple mp3 hosted anywhere like this http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+**[Vocaroo](https://github.com/podcastjs/podcastjs/wiki/Vocaroo)**
+
+Just upload your sound, get the public url and set it like this:
+```
+sound:
+  type : vocaroo_url
+  value : https://vocaroo.com/embed/1jkkNDCvZhyR?autoplay=0
+  language: es   
+```
+
+**Anywhere**
+
+Host anywhere but it should be a valid mp3 or wav and not to have the response header (`Content-Disposition: attachment`) which tells the browser to download instead direct reproducing. Samples:
+  - http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+
+In this case, just the public url like this
+
+```
+sound:
+  type : simple_url
+  value : http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+  language: en
+```
 
 ## For nodejs developers (contributors)
 
