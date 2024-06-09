@@ -80,10 +80,7 @@ function MarkdownDataSource() {
 
         if (file != "index.md" && file.endsWith(".md")) {
           let id = this.next();
-          let meta = this.getMetaForMarkdownIfExist(dir + file);
-          if(meta.sound_url){
-            meta.sound_url_en = meta.sound_url
-          }          
+          let meta = this.getMetaForMarkdownIfExist(dir + file);      
           this.getDocuments().insert({
             ...{
               "path": this.getFixedPath(this.getDocumentsBaseDir(), dir + file),
@@ -278,15 +275,7 @@ function MarkdownDataSource() {
       var found = contents.match(regex);
       if (typeof found !== 'undefined' && found != null) {
         var rawString = found[0].replace("<!--", "").replace("-->", "").trim();
-        var rawStrings = rawString.split(/\n/);
-        var meta = {};
-        for(var rawLine of rawStrings){
-          var parts = rawLine.split(":");
-          var key = parts[0].trim();
-          parts.shift();
-          meta[key] =  parts.join(":").trim()
-        }
-        return meta;
+        return yaml.load(rawString);
       }
     } catch (e) {
       console.log(`meta has an error :${file}, ${e}`);

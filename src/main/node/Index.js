@@ -21,81 +21,97 @@ const program = new Command();
     program
         .option('--new-site, --new-site <string>', 'Create a new podcastjs site')
         .option('--s, --start', 'start a local dev server')
-        .option('--p, --publish <string>', 'parse and publish the static web to the configured folder', "site")
+        .option('--p, --publish', 'render all the web assets and move them to the output folder')
+        .option('--o, --output <string>', 'folder name to store the web assets. Default is site', "site")
 
     program.parse();
     const options = program.opts();
 
     console.log("Shell arguments", options)
 
-    var f = finder(__filename);
-    var frameworkLocation = path.dirname(f.next().filename);
-
     if (typeof options.newSite !== 'undefined') {
         console.log("create new site")
         var externalSite = new ExternalSite();
         await externalSite.start(options.newSite, process.cwd(), frameworkLocation);
-    } else if (options.start === true || typeof options.publish !== 'undefined') {
-        var port = process.env.PORT || 2708;
+    } 
 
-        var projectBaseLocation = process.cwd();
-        var siteFolderName = options.publish;
-        var themeLocation;
-        var markdownFolderAbsoluteLocation = path.join(projectBaseLocation, "posts")
-        var siteFolderLocation = path.join(projectBaseLocation, siteFolderName)
+    if (options.start !== true && options.publish !== true){
+        console.log("You should use --start or --publish")
+        return;
+    }
 
+    var f = finder(__filename);
+    var frameworkLocation = path.dirname(f.next().filename);
+    var projectBaseLocation = process.cwd();
+
+    var siteFolderName = options.output;
+
+    var markdownFolderAbsoluteLocation;
+    var siteFolderLocation;
+    var themeLocation;
+
+    //calling is from inside of framework
+    if (frameworkLocation === projectBaseLocation) {
+        markdownFolderAbsoluteLocation = path.join(frameworkLocation, "posts")
+        siteFolderLocation = path.join(frameworkLocation, siteFolderName)
+        themeLocation = path.join(frameworkLocation, "theme");
+    }else{
+        markdownFolderAbsoluteLocation = path.join(projectBaseLocation, "posts")
+        siteFolderLocation = path.join(projectBaseLocation, siteFolderName)
         try {
             await fs.promises.access(path.join(projectBaseLocation, "theme"), fs.constants.F_OK)
             themeLocation = path.join(projectBaseLocation, "theme");
         } catch (e) {
             //external theme folder was not found. Default will be used
             themeLocation = path.join(__dirname, "..", "..", "..", "theme");
-        }
+        }        
+    }
 
-        if (frameworkLocation === projectBaseLocation) {
-            //it is runing from inside of framework    
-            var databaseLocation = path.join(themeLocation, "database.json")
-            console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
+    var port = process.env.PORT || 2708;    
 
-            var publisher = new Publisher();
-            await publisher.start(themeLocation, siteFolderLocation);
-
-            var builder = new Builder();
-            await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
-
-            if (options.start === true) {
-                var server = new Server();
-                await server.start(port, siteFolderLocation);
-            }             
-        } else {
-            //it is runing from outside of framework
-            console.log("Starting local server")
-
-            var databaseLocation = path.join(siteFolderLocation, "database.json")
-            console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
-
-            var publisher = new Publisher();
-            await publisher.start(themeLocation, siteFolderLocation);
-
-            var builder = new Builder();
-            await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
-
-            if (options.start === true) {
-                var server = new Server();
-                var expressInstance = await server.start(port, siteFolderLocation);
+    try {
+      await fs.promises.access(siteFolderLocation, fs.constants.F_OK)      
+      siteFolderExists = true;
+    } catch (e) {
+      siteFolderExists = false;
+    }
     
-                chokidar
-                    .watch(projectBaseLocation, { ignoreInitial: true })
-                    .on('all', async (event, filename) => {
-                        if (filename && filename.startsWith(siteFolderLocation)) return;
+    if(siteFolderExists===true){
+        try {
+          await fs.promises.rm(siteFolderLocation, { recursive: true });  
+          console.log("Success purge: "+siteFolderLocation)
+        } catch (e) {
+          console.log("Failed to clear the site folder: "+siteFolderLocation);
+          console.error(e);
+          process.exit(1);
+        } 
+    }
+    await fs.promises.mkdir(siteFolderLocation)
     
-                        console.log("Detected change: " + filename)
-                        console.log("\nRebuilding")
-                        await publisher.start(themeLocation, siteFolderLocation);
-                        await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
-                    })                
-            }    
-        }
+    var databaseLocation = path.join(siteFolderLocation, "database.json")
+    console.log("Folders", { projectBaseLocation, markdownFolderAbsoluteLocation, siteFolderLocation, themeLocation, databaseLocation })
+
+    //move from theme to site
+    var publisher = new Publisher();
+    await publisher.start(themeLocation, siteFolderLocation); 
+
+    var builder = new Builder();
+    await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);   
+    
+    if(options.start===true){
+        var server = new Server();
+        await server.start(port, siteFolderLocation);
+
+        chokidar
+            .watch(projectBaseLocation, { ignoreInitial: true })
+            .on('all', async (event, filename) => {
+                if (filename && filename.startsWith(siteFolderLocation)) return;
+
+                console.log("Detected change: " + filename)
+                console.log("\nRebuilding")
+                await publisher.start(themeLocation, siteFolderLocation);
+                await builder.start(projectBaseLocation, markdownFolderAbsoluteLocation, databaseLocation, siteFolderLocation, themeLocation);
+            })    
     }
 
 })();

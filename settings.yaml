@@ -22,7 +22,7 @@ podcasters:
 
   bitmanuc:
     name:				Jane Doe
-    avatar_image:			images/person_2.jpg
+    avatar_image:			https://github.com/podcastjs/podcastjs/assets/3322836/741258cf-7b83-4149-bf24-060dc49f3eef
     short_biography: Sysadmin
     email:			you@email.com
     twitter_url:        https://twitter.com/JRichardsz
@@ -30,4 +30,15 @@ podcasters:
     stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz
     youtube_url:        www.youtube.com/@JRichardsz
     blog_url:           https://jrichardsz.github.io
+
+  patterson:
+    name:				William Patterson 
+    avatar_image:			https://github.com/podcastjs/podcastjs/assets/3322836/90230730-71f0-45b4-b0b5-b0b06bcec78f
+    short_biography: Developer
+    email:			you@email.com
+    twitter_url:        https://twitter.com/JRichardsz
+    github_url:         https://github.com/jrichardsz
+    stackoverflow_url:  http://stackoverflow.com/users/3957754/jrichardsz
+    youtube_url:        www.youtube.com/@JRichardsz
+    blog_url:           https://jrichardsz.github.io    
 

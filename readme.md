@@ -48,7 +48,7 @@ Go to http://localhost:2708 and you will see something like this
 
 ## Publish
 
-After the creationof your markdowns and settings, if you need a static site to be hosted in some server, follow these steps
+After the creation of your markdowns and settings, if you need a static site to be hosted in some server, follow these steps
 
 Generate the static site
 
@@ -59,34 +59,48 @@ podcastjs --publish
 By default, it creates a **site** folder. If you need a custom folder:
 
 ```
-podcastjs --publish docs
+podcastjs --publish --output=docs
 ```
 
 ## How it works
 
-Only add any markdown file inside the posts folder with a content like this:
+Add any markdown file inside the posts folder with a content like this:
 
 ```
 <!-- 
 
 layout : post
-title : ¿Cómo crear un programa que aprenda por si solo?
-description : Un programa que aprenda de forma autónoma, es algo muy complejo.
+title : Contributing
+description : To contribute, follow the nex steps
 category : ai
 tags : series, fiction
 comments : true 
 author : Rich Dotcom
 thumbnail_image_url: images/img_3.jpg
-datetime_str: 20 September 2017
+datetime_str: 20 August 2017
 datetime : 2017-08-20
 duration: 0:30:20
-sound_url: http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+sound:
+  type : simple_url
+  value : http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
+  language: en
 
 -->
 
-Here you can put your markdown
+Here you can put your markdown!!!
 
 ```
+
+And  podcast.js will render like this
+
+![image](https://github.com/podcastjs/podcastjs/assets/3322836/6c0c4295-5727-456e-b846-b2fab18e8f7b)
+
+## Sound files hosts
+
+We suppport the following sound hosts:
+
+- [Vocaroo](https://github.com/podcastjs/podcastjs/wiki/Vocaroo)
+- The most simple mp3 hosted anywhere like this http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
 ## For nodejs developers (contributors)
 
@@ -95,6 +109,7 @@ Clone this repository and execute
 ```js
 npm run dev
 ```
+
 
 ## Acknowledgments
 
