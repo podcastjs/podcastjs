@@ -59,12 +59,12 @@ podcastjs --publish
 By default, it creates a **site** folder. If you need a custom folder:
 
 ```
-podcastjs --publish docs
+podcastjs --publish --output=docs
 ```
 
 ## How it works
 
-Only add any markdown file inside the posts folder with a content like this:
+Add any markdown file inside the posts folder with a content like this:
 
 ```
 <!-- 
@@ -91,7 +91,7 @@ Here you can put your markdown!!!
 
 ```
 
-This will render at the home page
+And  podcast.js will render like this
 
 ![image](https://github.com/podcastjs/podcastjs/assets/3322836/6c0c4295-5727-456e-b846-b2fab18e8f7b)
 
@@ -100,6 +100,7 @@ This will render at the home page
 We suppport the following sound hosts:
 
 - [Vocaroo](https://github.com/podcastjs/podcastjs/wiki/Vocaroo)
+- The most simple mp3 hosted anywhere like this http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3
 
 ## For nodejs developers (contributors)
 
