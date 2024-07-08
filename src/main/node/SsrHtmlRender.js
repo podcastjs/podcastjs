@@ -4,8 +4,8 @@ const fsExtra = require("fs-extra");
 const path = require("path");
 const copyPromise = util.promisify(fsExtra.copy);
 const markdownit = require('markdown-it');
-const handlebars = require('handlebars');
-const md = markdownit({ breaks: true })
+const Handlebars = require('handlebars');
+const md = markdownit({ breaks: true,html: true })
 const yaml = require('js-yaml');
 
 function SsrHtmlRender() {
@@ -13,9 +13,21 @@ function SsrHtmlRender() {
   this.start = async (projectBaseLocation, markdownFolderAbsoluteLocation, markdownFilesMetadata,
     siteFolderAbsoluteLocation, themeLocationAbsoluteLocation) => {
 
-    handlebars.registerHelper('if_strint_eq', function(arg1, arg2, options) {
+      Handlebars.registerHelper('if_strint_eq', function(arg1, arg2, options) {
         return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
-    });  
+    });
+
+    Handlebars.registerHelper('toDateString', function(arg1, options) {
+      try {
+          var parts = arg1.split("-");
+          var date = new Date(parts[0], parts[1]-1, parts[2]);
+          return date.toDateString().replace(/^\S+\s/,'')
+      } catch (error) {
+          console.log("Failed to evaluate helper: toDateString")
+          console.log(error)
+          return arg1;
+      }
+    });       
 
     var rawYamlString = await fs.promises.readFile(path.join(projectBaseLocation, "settings.yaml"), 'utf8')
     const settings = yaml.load(rawYamlString);
@@ -31,7 +43,7 @@ function SsrHtmlRender() {
     siteFolderAbsoluteLocation, themeLocationAbsoluteLocation, settings) {
 
     var rawTemplate = await fs.promises.readFile(path.join(themeLocationAbsoluteLocation, "index.html"), "utf-8");
-    var indexTemplate = handlebars.compile(rawTemplate);
+    var indexTemplate = Handlebars.compile(rawTemplate);
 
     console.log("Home page: ", path.join(themeLocationAbsoluteLocation, "index.html"))
     var htmlFileAbsoluteLocation = path.join(projectBaseLocation, "index.html");
@@ -71,7 +83,7 @@ function SsrHtmlRender() {
     await fs.promises.mkdir(postFolderAbsoluteLocation)
 
     var rawTemplate = await fs.promises.readFile(path.join(themeLocationAbsoluteLocation, "single-post.html"), "utf-8");
-    var singlePostTemplate = handlebars.compile(rawTemplate);
+    var singlePostTemplate = Handlebars.compile(rawTemplate);
 
     console.log("Markdown to be built:")
     for (markdownFileInfo of markdownFilesMetadata) {

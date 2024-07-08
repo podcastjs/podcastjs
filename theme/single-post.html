@@ -73,7 +73,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-12 text-center">
-            <a href="#">{{this.author}} </a><span class="mx-2">&bullet;</span> {{this.datetime_str}} <span class="mx-2">&bullet;</span> {{this.duration}}
+            <a href="#">{{this.author}} </a><span class="mx-2">&bullet;</span> {{toDateString this.datetime}} <span class="mx-2">&bullet;</span> {{this.duration}}
             <h1 class="mb-3">{{this.title}}</h1>
           </div>
         </div>
@@ -98,7 +98,6 @@
     </div>
 
     <div class="container">
-      <br><br>
       <div id="html-container">
         @html
       </div>

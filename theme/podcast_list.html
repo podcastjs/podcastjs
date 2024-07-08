@@ -12,7 +12,7 @@
 
           <h3 class="font-weight-light"><a href="{{this.post_url}}">{{this.title}}</a></h3>
           <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{this.author}} <span
-                  class="sep">/</span> {{this.datetime_str}} <span class="sep">/</span> {{this.duration}}</small></span></div>
+                  class="sep">/</span> {{toDateString this.datetime}} <span class="sep">/</span> {{this.duration}}</small></span></div>
 
           {{#if this.sound}}
             <div class="">

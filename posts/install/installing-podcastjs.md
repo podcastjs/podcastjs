@@ -8,8 +8,7 @@ tags : series, fiction
 comments : true 
 author : Rich Dotcom
 thumbnail_image_url: images/img_3.jpg
-datetime_str: 24 August 2017
-datetime : 2017-08-24
+datetime : "2017-08-24"
 duration: 0:30:20
 sound:
   type : vocaroo_url
