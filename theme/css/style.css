@@ -1388,6 +1388,12 @@ a:hover {
   width: 25px;
 }
 
+/*comments*/
+
+.comments_container {
+  margin-left: 200px; 
+  margin-right: 200px
+}
 
 @media (max-width: 991.98px) {
   .hero h1 {
@@ -1509,5 +1515,17 @@ a:hover {
 @media (min-width: 768px) {
   .podcast-entry .image {
     width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .comments_container {
+    margin-left: 20px; 
+    margin-right: 20px
+  }
+
+  .sing_post_top_image {
+    width: 80%; 
   }
 }
