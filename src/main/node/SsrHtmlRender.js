@@ -93,7 +93,8 @@ function SsrHtmlRender() {
       const result = md.render(markdownFileInfo.text);
       var data = {
         ...markdownFileInfo,
-        "site_name": settings.site_name, "about_us_paragraph": settings.about_us_paragraph, "disqus_id": settings.disqus_id
+        "site_name": settings.site_name, "about_us_paragraph": settings.about_us_paragraph, "disqus_id": settings.disqus_id,
+        google_analytics_section: settings.google_analytics_section
       };
       var renderedHtml = singlePostTemplate(data);
       var readyHtml = renderedHtml.replace("@html", result);
